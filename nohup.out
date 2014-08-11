@@ -1,0 +1,2 @@
+source venv/bin/activate && ./manage.py runserver 0.0.0.0:15540
+[11/Aug/2014 16:20:20] "GET /static/pages/apppage/index.html HTTP/1.0" 200 1757
