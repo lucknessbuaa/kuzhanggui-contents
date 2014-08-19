@@ -1,0 +1,48 @@
+{% extends "scaffold.html"%}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/login.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form class='form' role='form' method='POST'>  {% csrf_token %}
+        <p class="alert alert-danger" style="display: none;"></p>
+        <input type="hidden" name='next' value="{{ request.GET.next }}"/>        <div class="form-group" id="username-wrap">
+            <label class="sr-only" for="email">用户名</label>
+            <input type="text" class="input-lg form-control" 
+                    id="username" name="user" placeholder="用户名">
+        </div>
+        <div class="form-group" id="password-wrap">
+            <label class="sr-only" for="password">密码</label>
+            <input type="password" class="form-control input-lg" 
+                id="password" name="password" placeholder="密码">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="remember_me"/>保存密码
+            </label>
+            <button class="pull-right btn btn-primary btn-lg"
+                    data-loading-text="登录中" id='submit' 
+                    type="submit">登录</button>
+        </div>
+    </form> 
+</div>  
+<!--
+<p class="links">
+    <a href="/register" target="_blank">Sign up</a> 
+    &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="">Forget password?</a>
+</p>
+-->
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
+</script>
+<script>
+    require(["login"]);
+</script>
+{% endblock %} 

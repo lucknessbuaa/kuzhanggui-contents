@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block css %}
+    <link rel="stylesheet" 
+        href="{{ STATIC_URL }}components/bootstrap/dist/css/bootstrap.min.css">
+    {% endblock %}
+
+    {% block polyfill %}
+    <!-- poly fill scripts -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" 
+        src="{{ STATIC_URL }}components/console-polyfill/index.js"></script>
+    <script type="text/javascript" 
+        src="{{ STATIC_URL }}components/html5shiv/dist/html5shiv.js"></script>
+    <script type="text/javascript" 
+        src="{{ STATIC_URL }}components/respond/dest/respond.min.js"></script>
+    <script type="text/javascript" 
+        src="{{ STATIC_URL }}components/es5-shim/es5-shim.min.js"></script>
+    <![endif]-->
+    {% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    {% block js %}{% endblock %}
+</body>
+</html>

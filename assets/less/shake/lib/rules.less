@@ -1,0 +1,39 @@
+.mid(@width;@top) {
+    position: absolute;
+    top: @top;
+    left: 50%;
+    width: @width;
+    margin-left: -@width/2;
+}
+
+.rules {
+    .mid(270px;2%);
+    z-index: 1020;
+
+    .exit {
+        position: absolute;
+        top: 8px;
+        left: 3px;
+        background: url(/static/img/shake/rules-exit.png) center center no-repeat;
+        border: none;
+        outline: none;
+        @exit-size: 30px;
+        background-size: @exit-size, @exit-size;
+        .square(@exit-size);
+    }
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.rules-overlay {
+    z-index: 1010;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: url(/static/img/shake/rules-overlay.png) top center no-repeat;
+    background-size: cover;
+}

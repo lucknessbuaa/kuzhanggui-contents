@@ -1,0 +1,171 @@
+@import "bootstrap/less/bootstrap.less";
+@import "base-font.less";
+
+@import "shake/lib/button-bar.less";
+@import "shake/lib/rules.less";
+
+body {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.container {
+    z-index: 1000;
+    background: url(/static/img/shake/bg.png) top center no-repeat #111;
+    background-size: 100% auto;
+    position: absolute;
+    padding: 0px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img.header {
+        position: absolute;
+        top: 12%;
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+        height: 100px;
+    }
+
+    .bottle {
+        position: absolute;
+        top: 32%;
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+
+        .bottle-body {
+            .size(120px;auto);
+            .center-block();
+            margin-top: 35px;
+            height: 200px;
+            position: relative;
+            background: url(/static/img/shake/bottle.png) center center no-repeat;
+            background-size: 100%;
+
+            canvas {
+                .size(90px;140px;);
+                position: absolute;
+                background-color: transparent;
+                bottom: 25px;
+                left: 50%;
+                margin-left: -45px;
+
+                &.first {
+                    background: url(/static/img/shake/first.png) center center no-repeat;
+                    background-size: 80%;
+                }
+
+                &.second {
+                    background: url(/static/img/shake/second.png) center center no-repeat;
+                    background-size: 80%;
+                }
+
+                &.third {
+                    background: url(/static/img/shake/third.png) center center no-repeat;
+                    background-size: 80%;
+                }
+
+                &.try-again {
+                    background: url(/static/img/shake/try-again.png) center center no-repeat;
+                    background-size: auto 120px;
+                }
+            }
+        }
+    }
+}
+
+.phone-prompt {
+    z-index: 1010;
+    background: url(/static/img/shake/rules-overlay.png) top center no-repeat transparent;
+    background-size: 100% auto;
+    position: absolute;
+    padding: 0px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .phone-prompt-form {
+        position: absolute; 
+        top: 30%;
+        left: 50%;
+        width: 280px;
+        margin-left: -140px;
+        padding-top: 50px;
+        background: url(/static/img/shake/lottery-tip.png) left top no-repeat;
+        background-size: 50% auto;
+
+        p {
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        input {
+            display: inline-block;
+            vertical-align: middle;
+
+            &[type=text] {
+                color: #fff;
+                width: 200px;
+                padding: 3px 8px;
+                font-size: 14px;
+                background: transparent;
+                border: 1px solid #ccc;
+            }
+
+            &[type=submit] {
+                width: 67px;
+                height: 30px;
+                background: url(/static/img/shake/submit.png) center center no-repeat;
+                margin-left: 8px;
+                background-size: 100% 100%;
+                border: none;
+            }
+        }
+    }
+}
+
+.lottery-result {
+    z-index: 1040;
+    width: 280px;
+    height: 178px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -140px;
+    background: url(/static/img/shake/lottery-empty.png) center center no-repeat;
+    background-size: cover;
+
+    &.first {
+        background: url(/static/img/shake/lottery-first.png) center center no-repeat;
+        background-size: cover;
+    }
+
+    &.second {
+        background: url(/static/img/shake/lottery-second.png) center center no-repeat;
+        background-size: cover;
+    }
+
+    &.third {
+        background: url(/static/img/shake/lottery-third.png) center center no-repeat;
+        background-size: cover;
+    }
+}
+
+.prompt-overlay {
+    .rules-overlay();
+}
+
+.lottery-result-overlay {
+    .rules-overlay();
+    
+    img {
+        width: 250px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+}

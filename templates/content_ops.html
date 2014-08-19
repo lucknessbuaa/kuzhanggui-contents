@@ -1,0 +1,20 @@
+<div class="btn-group btn-group-sm"
+    data-pk="{{ record.pk }}"
+    data-name="{{ record.name }}"
+    data-spt_bp="{{ record.spt_bp|lower}}"
+    data-spt_ar="{{ record.spt_ar|lower}}"
+    data-spt_im="{{ record.spt_im|lower}}"
+    data-spt_vi="{{ record.spt_vi|lower}}"
+>
+    <a href="/contents/backend/{{ record.pk }}/" class="btn btn-default manage" title="Manage vote">
+        <span class="glyphicon glyphicon-wrench"></span>
+    </a>
+
+    <button class="btn btn-default edit" title="Edit vote">
+        <span class="glyphicon glyphicon-edit"></span>
+    </button>
+
+    <button class="btn btn-danger delete" title="Delete vote">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>

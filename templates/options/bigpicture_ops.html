@@ -1,0 +1,17 @@
+<div class="btn-group btn-group-sm"
+    data-pk="{{ record.pk }}"
+    data-name="{{ record.name }}"
+    data-image="{{ record.image }}"
+    data-contents="{{ record.contents.pk }}"
+    data-type = "{{ record.contents.type}}"
+    data-url="{{ record.url }}" >
+
+
+    <button class="btn btn-default bpedit" title="edit option">
+        <span class="glyphicon glyphicon-edit"></span>
+    </button>
+
+    <button class="btn btn-danger bpdelete" title="delete option">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>

@@ -1,0 +1,183 @@
+{% extends "scaffold.html" %}
+{% load django_tables2 %}
+
+{% block title %}{{name}}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/options.css">
+{% endblock %}
+
+{% block content %}
+<div class="container page-header" style="position:relative; margin-top: 20px;">
+    <h2 style="margin-top: 0px;">{{name}}</h2>
+    <div style="position:absolute;right:20px;bottom:10px">
+        <span class="glyphicon glyphicon-share-alt" style="font-size:17px"></span>
+        <a href="/contents/backend" style="font-size:18px">Back to Contents</a>
+    </div>
+</div>
+<div class="container">
+    <div class="btn-toolbar">
+    <div class="btn-group">
+        <button class="btn btn-default" id="create-bigpicture">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Big Picture
+        </button>
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>        
+        <ul class="dropdown-menu" role="menu"> 
+            {% if spt_bp %}
+            <li><a href="#create-bigpicture" id="create-bigpicture2">&nbsp;&nbsp;Create Big Picture</a></li>
+            {% endif %}
+            {% if spt_ar %}
+            <li class="divider"></li>
+            <li><a href="#create-article" id="create-article">&nbsp;&nbsp;Create Article</a></li>
+            {% endif %}
+            {% if spt_im %}
+            <li class="divider"></li>
+            <li><a href="#create-image" id="create-image">&nbsp;&nbsp;Create Image</a></li>
+            {% endif %}
+            {% if spt_vi %}            
+            <li class="divider"></li>
+            <li><a href="#create-video" id="create-video">&nbsp;&nbsp;Create Video</a></li>
+            {% endif %}
+        </ul>
+    </div> 
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Big Pictures</div>
+        <div class="panel-body">
+            {% render_table table1 "table_template.html" %}   
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Contents</div>
+        <div class="panel-body">
+            {% render_table table "table_template.html" %}   
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/template" id="form_tpl">
+<form role="form" class="form-horizontal">
+    <input type="hidden" name="pk">
+    <div class="alert" style="display: none"></div>
+    <div class="form-group ar vi im al" style="display:None">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form.name.label }}</label>
+        </div>
+        <div class="col-sm-9">
+            {{ form.name }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>    
+    <div class="form-group ar vi im al" style="display:None">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form.image.label }}</label>
+        </div>
+        <div class="col-sm-9 checkbox">
+            {{ form.image }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>   
+    <div class="form-group ar vi im al" style="display:None">
+        <label class="col-sm-2  control-label" id="vi-required" 
+                for="d_name">
+                {{ form.description.label }}</label>
+        <div class="col-sm-9">
+            {{ form.description }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>
+    <div class="form-group vi al" style="display:None">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form.url.label }}</label>
+        </div>
+        <div class="col-sm-9">
+            {{ form.url }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>    
+    <div class="form-group ar al" style="display:None">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form.contents.label }}</label>
+        </div>
+        <div class="col-sm-9">
+            {{ form.contents }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>   
+</form>
+</script>
+
+<script type="text/template" id="form_tpl2">
+<form role="form" class="form-horizontal">
+    <input type="hidden" name="pk">
+    <div class="alert" style="display: none"></div>
+    <div class="form-group">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form1.name.label }}</label>
+        </div>
+        <div class="col-sm-9">
+            {{ form1.name }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>    
+    <div class="form-group">
+        <div class="col-sm-2 control-label required">
+            <label for="d_name">{{ form1.image.label }}</label>
+        </div>
+        <div class="col-sm-9 checkbox">
+            {{ form1.image }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>   
+    <div class="form-group">
+        <div class="col-sm-2 control-label required">
+            <label>URL</label>
+        </div>
+        <div class="col-sm-9">
+            <label id="id_ignore" class="radio-inline checkbox">
+                <input id="check-content" class="field" type="radio" name="URL" value="Content" checked="checked">Content  
+            </label>
+            <label id="id_ignore" class="radio-inline checkbox">
+                <input id="check-url" class="field" type="radio" name="URL" value="URL">URL
+            </label>
+        </div>
+    </div>       
+    <div class="form-group" id="change-url"  style="display:None">
+        <div class="col-sm-2 control-label">
+        </div>
+        <div class="col-sm-9">
+            {{ form1.url }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>   
+    <div class="form-group" id="change-content"  style="display:block">
+        <div class="col-sm-2 control-label">
+        </div>
+        <div class="col-sm-9">
+            {{ form1.contents }}
+            <ul class="parsley-error-list" style="display:none"></ul>
+        </div>
+    </div>  
+</form>
+</script>
+<script type="text/template" id="form_tpl3">   
+    <div id="container" style="min-width:800px;height:400px"></div> 
+</script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
+</script>
+<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+
+<script>require(["js/options"]);</script>
+{% endblock %}

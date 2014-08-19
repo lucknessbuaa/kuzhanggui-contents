@@ -37,13 +37,13 @@ LOGGING = {
             'filename': 'logs/app.log',
             'formatter': 'normal'
         },
-        'votes': {
+        'contents': {
             'level': 'DEBUG',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'D',
             'interval': 1,
             'backupCount': 5,
-            'filename': 'logs/votes.log',
+            'filename': 'logs/contents.log',
             'formatter': 'normal'
         }
     },
@@ -53,8 +53,8 @@ LOGGING = {
             'propagate': False,
             'level': 'DEBUG'
         },
-        'vote_records': {
-            'handlers': ['votes'],
+        'content_records': {
+            'handlers': ['contents'],
             'level': 'DEBUG'
         },
         '': {

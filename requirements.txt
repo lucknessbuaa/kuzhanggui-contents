@@ -4,6 +4,8 @@ Django
 mysql-python
 django-parsley
 python-memcached
+django_select2
+django-tables2
 django-tables3
 django-mysqlpool
 django-oauth-toolkit
@@ -12,5 +14,6 @@ pillow
 requests
 redis
 
+django-tastypie
 django-render-json
 django-render-csv

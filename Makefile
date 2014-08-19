@@ -25,8 +25,8 @@ collectstatic:
 	$(activate_venv) \
 	&& ./manage.py collectstatic --noinput
 
-database:=votes
-password:=
+database:=contents
+password:=nameLR9969
 db:
 	-mysql -u root --password=$(password) -e \
 				"drop database $(database)"

@@ -1,0 +1,35 @@
+{% extends "scaffold.html" %}
+{% load django_tables2 %}
+
+{% block title %}内容中心{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/contents.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-toolbar">
+        <button class="btn btn-primary" id="create-column">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Column
+        </button>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Column
+        </div>
+        <div class="panel-body">
+            {% render_table table "table_template.html" %}   
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
+</script>
+<script>require(["js/contents"]);</script>
+{% endblock %}

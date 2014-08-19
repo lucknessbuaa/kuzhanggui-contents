@@ -1,0 +1,14 @@
+<div class="search pull-right">
+    <form data-provide="search-form" method="GET" action={{ action }}>
+        <input class="form-control" type="text" name="q" value="{{ value }}">
+        {% if value %}
+	    <a href={{ href }} type="button" class="btn btn-link reset">
+	        <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        {% else %}
+            <button type="submit" class="btn btn-link search">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        {% endif %}
+    </form>
+</div>

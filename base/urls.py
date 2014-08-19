@@ -1,17 +1,25 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.contrib import admin
+from django.http import HttpResponse
+from resources import *
+from tastypie.api import Api
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+def index(request):
+    return HttpResponse("hello world")
 
+v = Api(api_name = 'output')
+v.register(ContentResource())
+v.register(ArticleResource())
+v.register(VideoResource())
+v.register(ImageResource())
+v.register(BigpictureResource())
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'contents.views.home', name='home'),
-    # url(r'^contents/', include('contents.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$',index),
+    url(r'^ajax-upload/', include('ajax_upload.urls')),
+    url(r'^contents/backend/',include('contents.urls')),
+    url(r'^API/',include(v.urls))
 )
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT}))

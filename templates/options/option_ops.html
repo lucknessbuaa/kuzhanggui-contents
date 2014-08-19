@@ -1,0 +1,21 @@
+<div class="btn-group btn-group-sm"
+    data-pk="{{ record.pk }}"
+    data-name="{{ record.name }}"
+    data-type="{{ record.type}}"
+    data-image="{{ record.image }}"
+    data-description="{{ record.description }}"
+    data-contents="{{ record.contents }}"
+    data-url="{{ record.url }}">
+
+    <button class="btn btn-default data" title="data option">
+        <span class="glyphicon glyphicon-stats"></span>
+    </button> 
+
+    <button class="btn btn-default edit" title="edit option">
+        <span class="glyphicon glyphicon-edit"></span>
+    </button>
+
+    <button class="btn btn-danger delete" title="delete option">
+        <span class="glyphicon glyphicon-remove"></span>
+    </button>
+</div>
