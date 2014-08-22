@@ -126,27 +126,27 @@ define(function(require) {
             this.el.contents.value = CKEDITOR.instances.id_contents.getData();
 
             if (this.el.name.value === '') {
-                this.addError(this.el.name, '名称不能为空');
+                this.addError(this.el.name, 'Name can\'t be null');
                 return setTimeout(onComplete, 0);
             }
 
             if (this.el.image.value === '') {
-                this.addError(this.el.image, '图片不能为空');
+                this.addError(this.el.image, 'Cover can\'t be null');
                 return setTimeout(onComplete, 0);
             }
             
             if (this.el.description.value === '' && this.el.type === 3) {
-                this.addError(this.el.description, '描述不能为空');
+                this.addError(this.el.description, 'Description can\'t be null');
                 return setTimeout(onComplete, 0); 
             } 
 
             if (this.el.url.value === '' && this.el.type === 3) {
-                this.addError(this.el.url, 'URL不能为空');
+                this.addError(this.el.url, 'URL can\'t be null');
                 return setTimeout(onComplete, 0);
             }
      
             if (this.el.contents.value === '' && this.el.type === 1) {
-                this.addError(this.el.contents, '内容不能为空');
+                this.addError(this.el.contents, 'Contents can\'t be null');
                 return setTimeout(onComplete, 0); 
             }        
                     
@@ -160,7 +160,7 @@ define(function(require) {
             }, this);
 
             var onFinish = _.bind(function() {
-                this.tip('操作成功', 'success');
+                this.tip('Success!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -239,24 +239,24 @@ define(function(require) {
 
 
             if (this.el.name.value === '') {
-                this.addError(this.el.name, '名称不能为空');
+                this.addError(this.el.name, 'Name can\'t be null');
                 return setTimeout(onComplete, 0);
             }
 
             if (this.el.image.value === '') {
-                this.addError(this.el.image, '图片不能为空');
+                this.addError(this.el.image, 'Image can\'t be null');
                 return setTimeout(onComplete, 0);
             }
             
             if($("#check-content").is(":checked"))
                 if (this.el.contents.value ===''){
-                    this.addError(this.el.contents,'URL不能为空');
+                    this.addError(this.el.contents,'URL can\'t be null');
                     return setTimeout(onComplete, 0);
                 }else 
                     this.el.url.value = '';
             if($("#check-url").is(":checked"))
                 if (this.el.url.value ===''){
-                    this.addError(this.el.url,'URL不能为空');
+                    this.addError(this.el.url,'URL can\'t be null');
                     return setTimeout(onComplete, 0);
                 }else 
                     this.el.contents.value = '';
@@ -268,7 +268,7 @@ define(function(require) {
                 );
             }, this);
             var onFinish = _.bind(function() {
-                this.tip('操作成功', 'success');
+                this.tip('Success!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -293,7 +293,8 @@ define(function(require) {
         var modal = new modals.LargeModal();
         modal.setForm(form);
         $(modal.el).appendTo(document.body);
-        CKEDITOR.replace('contents');
+//        CKEDITOR.replace('contents');
+        CKEDITOR.replace("id_contents", {"filebrowserWindowWidth": 940, "toolbar_Basic": [["Source", "-", "Bold", "Italic"]], "toolbar_Full": [["Styles", "Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker", "Undo", "Redo"], ["Image", "Flash", "Table", "HorizontalRule"], ["TextColor", "BGColor"], ["Smiley", "SpecialChar"], ["Source"]], "filebrowserUploadUrl": "/ckeditor/upload/", "height": 300, "width": 650, "filebrowserBrowseUrl": "/ckeditor/browse/", "skin": "moono", "filebrowserWindowHeight": 725, "toolbar": "Full"});
 
         $create = $("#create-article");
         $create.click(function() {
@@ -306,6 +307,7 @@ define(function(require) {
         $create2 = $("#create-image");
         $create2.click(function() {
             $(".im").css({"display":"block"});
+            $("#coverimage").html("Image");
             type = 2;
             modal.show(); 
             modal.setTitle('Create Image');
@@ -332,6 +334,7 @@ define(function(require) {
             if(student.type===2){
                 type = 2;
                 name = 'Image';
+                $("#coverimage").html("Image");
                 $(".im").css({"display":"block"});
             }else 
             if(student.type===3){
@@ -386,7 +389,6 @@ define(function(require) {
             var name = student.name;
 
             var myDate = new Date();
-            alert(myDate.toLocaleDateString());
 
             $("#container").highcharts({
                 title: {

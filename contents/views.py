@@ -53,15 +53,14 @@ def index(request):
     })
 
 class ContentForm(forms.ModelForm):
+    name = forms.CharField(label=u'Hello',max_length=20) 
+    
     class Meta:
         model = Content
-
+        
 @require_POST
 @as_json
 def add_content(request):
-#    logger.debug("----------------dd--------------begin---------------------------------")
-#    logger.debug(request.POST)
-#    logger.debug("------------------------------end---------------------------------")
     form = ContentForm(request.POST)
     if not form.is_valid():
         logger.warn("form is invalid");

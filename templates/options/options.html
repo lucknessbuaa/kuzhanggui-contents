@@ -18,9 +18,15 @@
 <div class="container">
     <div class="btn-toolbar">
     <div class="btn-group">
+        {% if spt_bp %}
         <button class="btn btn-default" id="create-bigpicture">
             <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Big Picture
         </button>
+        {% else %}
+        <button class="btn btn-default" disabled  id="create-bigpicture">
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Big Picture
+        </button>
+        {% endif %}
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>
         </button>        
@@ -76,10 +82,15 @@
     </div>    
     <div class="form-group ar vi im al" style="display:None">
         <div class="col-sm-2 control-label required">
-            <label for="d_name">{{ form.image.label }}</label>
+            <label for="d_name" id="coverimage">{{ form.image.label }}</label>
         </div>
         <div class="col-sm-9 checkbox">
-            {{ form.image }}
+            <div class="col-sm-6">
+                {{ form.image }}
+            </div>
+            <div class="col-sm-4">
+                <p style="font-size:13px">{{form.image.help_text}}</p>
+            </div>
             <ul class="parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
@@ -131,7 +142,12 @@
             <label for="d_name">{{ form1.image.label }}</label>
         </div>
         <div class="col-sm-9 checkbox">
-            {{ form1.image }}
+            <div class="col-sm-6">
+                {{ form1.image }}
+            </div>
+            <div class="col-sm-4">
+                <p style="font-size:13px">{{form.image.help_text}}</p>
+            </div>
             <ul class="parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
@@ -174,10 +190,20 @@
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
 </script>
+<!--<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.all.min.js">
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.parse.min.js">
 <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+-->
+<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+
+<!--<script type="text/javascript" src="{{ STATIC_URL }}js/ckeditor.js"></script>
+-->
+<!--<script type="text/javascript" src="{{ STATIC_URL }}ckeditor/ckeditor/ckeditor.js"></script>
+-->
 <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
-
+<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+-->
 <script>require(["js/options"]);</script>
 {% endblock %}

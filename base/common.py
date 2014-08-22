@@ -15,10 +15,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ajax_upload',
     'base',
+    'DjangoUeditor',
     'tastypie',
+    'ckeditor',
     'contents',
     'django_tables2',
 )
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -90,4 +93,29 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.request"
 )
+
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT +'/ckeditor/'
+
+CKEDITOR_CONFIGS = { 
+    'default': {
+        'toolbar': [
+            ['Cut','Copy','Paste','PasteText','PasteFromWord','-'],    
+            ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],    
+            ['Bold','Italic','Underline','Strike','-'],    
+            ['NumberedList','BulletedList','-','Blockquote'],    
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],    
+            ['Link','Unlink'],    
+            ['Image','Flash','HorizontalRule','Smiley','SpecialChar','TextColor','BGColor'],                     ['Styles','Format','Font','FontSize'],
+            ['Maximize','ShowBlocks','Preview','Source'],
+        ],    
+        'language': 'zh-cn',
+        'width': 760,
+        'height': 300,
+        'image_previewText': 'image',
+        'toolbarCanCollapse': False,
+    },    
+    'awesome_ckeditor': {
+        'toolbar': 'Basic', 
+    },    
+}
 

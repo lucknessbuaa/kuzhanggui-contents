@@ -25,16 +25,12 @@ from contents.models import Content, Option, Bigpicture
 from ajax_upload.widgets import AjaxClearableFileInput
 from ckeditor.widgets import CKEditorWidget
 
-#from django.views.decorators.csrf import csrf_exempt
 logger = logging.getLogger(__name__)
 
 class OptionForm(forms.ModelForm):
-#    contents = forms.CharField(label=u'Contents', widget=CKEditorWidget())
-#    def __init__(self, *args, **kw):
-#        self.type = 1 
+    contents = forms.CharField(label='内容', widget=CKEditorWidget(), required = False)
     class Meta:
         model = Option
-#        fields = ('name', 'image', 'description', 'contents')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',                
@@ -47,11 +43,6 @@ class OptionForm(forms.ModelForm):
             'image': AjaxClearableFileInput(attrs={
                 'class': 'form-control',
                 'parsley-required': 'true'
-            }),
-            'contents':forms.TextInput(attrs={
-                'class': 'form-control',
-                'style': "top:10px",
-                'name': 'editor'
             }),
             'url':forms.URLInput(attrs={
                 'class': 'form-control',

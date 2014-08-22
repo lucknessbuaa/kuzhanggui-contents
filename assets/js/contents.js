@@ -51,7 +51,7 @@ define(function(require) {
                 </div>
                 <div class="col-sm-6">
                     <input type="text" id="id_name" class="form-control" 
-                        name="name" max_length=50>
+                        name="name" maxlength=20>
                 </div>
             </div> 
             <div class="form-group">
@@ -185,18 +185,16 @@ define(function(require) {
         var modal = new modals.FormModal();
         modal.setForm(form);
         $(modal.el).appendTo(document.body);
-        document.getElementById("spt_bp").checked=true; 
-        document.getElementById("spt_bp").disabled=true
         $create = $("#create-column");
         $create.click(function() {
             modal.show();
-            modal.setTitle('Create Vote');
+            modal.setTitle('Create Column');
             modal.setSaveText("Create", "Creating...");
         });
 
 
         $("table").on("click", ".edit", function() {
-            modal.setTitle('Edit Vote');
+            modal.setTitle('Edit Column');
             modal.setSaveText("Save", "Saving...");
             var vote = $(this).parent().data();
             form.setVote(vote);
@@ -211,7 +209,7 @@ define(function(require) {
                 utils.reload(500);
             });
         });
-        modal.setTitle('Delete vote');
+        modal.setTitle('Delete Column');
         modal.tip('Are you sure?');
         modal.setSaveText('Delete', 'Deleting...');
         modal.on('succeed', function() {
