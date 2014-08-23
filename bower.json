@@ -14,7 +14,7 @@
     "console-polyfill": "~0.1.1",
     "html5shiv": "~3.7.0",
     "jquery": "1.11.0",
-    "bootstrap": "~3.2.0",
+    "bootstrap": "https://github.com/limijiaoyin/bootstrap.git#plus-lock",
     "respond": "~1.4.2",
     "jquery-placeholder": "~2.0.8",
     "requirejs": "~2.1.11",
@@ -36,7 +36,8 @@
     "smalot-bootstrap-datetimepicker": "~2.2.0",
     "moment": "~2.6.0",
     "excanvas": "*",
-    "font-awesome": "~4.1.0"
+    "font-awesome": "~4.1.0",
+    "velocity": "~0.11.7"
   },
   "resolutions": {
     "jquery": ">=1.6"
