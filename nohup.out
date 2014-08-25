@@ -35012,3 +35012,10 @@ Quit the server with CONTROL-C.
 [25/Aug/2014 10:47:56] "GET /static/components/jquery.iframe-transport/jquery.iframe-transport.js HTTP/1.0" 200 10469
 [25/Aug/2014 10:47:56] "GET /static/ajax_upload/js/ajax-upload-widget.js HTTP/1.0" 200 7622
 [25/Aug/2014 10:47:57] "GET /static/components/select2/select2.js HTTP/1.0" 200 144129
+Validating models...
+
+0 errors found
+August 22, 2014 - 11:59:48
+Django version 1.6.5, using settings 'base.develop'
+Starting development server at http://0.0.0.0:15540/
+Quit the server with CONTROL-C.

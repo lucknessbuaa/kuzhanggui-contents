@@ -1,0 +1,35 @@
+body {
+    background: #ededed;
+}
+
+.container {
+    box-sizing: content-box;
+    margin-top: 150px;
+    max-width: 362px;
+    background: #fff;
+    padding: 45px 30px 30px;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+}
+
+#password-wrap {
+    margin-top: 20px;
+}
+
+.form .checkbox {
+    margin-top: 30px;
+}
+
+#submit {
+    width: 200px;
+}
+
+.links {
+    color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    box-sizing: content-box;
+    max-width: 362px;   
+    text-align: center;
+}

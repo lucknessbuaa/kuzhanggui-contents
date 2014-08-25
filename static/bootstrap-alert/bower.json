@@ -1,0 +1,24 @@
+{
+  "name": "bootstrap-alert",
+  "version": "0.0.2",
+  "authors": [
+    "Jarvys <yuhan534@126.com>"
+  ],
+  "description": "shortcuts to show messages with bootstrap alert",
+  "main": "alert.js",
+  "homepage": "https://github.com/jarvys/bootstrap-alert",
+  "keywords": [
+    "bootstrap",
+    "alert",
+    "message",
+    "shortcut"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

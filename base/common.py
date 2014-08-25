@@ -15,7 +15,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'ajax_upload',
     'base',
-    'DjangoUeditor',
+    #'DjangoUeditor',
     'tastypie',
     'ckeditor',
     'contents',

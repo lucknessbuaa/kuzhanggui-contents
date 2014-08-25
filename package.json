@@ -1,0 +1,28 @@
+{
+  "name": "kuzhanggui-contents",
+  "version": "0.0.0",
+  "description": "kuzhanggui-contents ===================",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/limijiaoyin/kuzhanggui-contents.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/limijiaoyin/kuzhanggui-contents/issues"
+  },
+  "dependencies": {
+    "gulp-requirejs": "~0.1.3",
+    "gulp": "~3.8.7"
+  },
+  "devDependencies": {
+    "underscore": "~1.6.0",
+    "async": "~0.9.0",
+    "gulp-less": "~1.3.5",
+    "requirejs": "~2.1.14"
+  }
+}

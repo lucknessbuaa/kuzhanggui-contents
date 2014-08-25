@@ -1,0 +1,25 @@
+{
+  "name": "radiu",
+  "version": "0.0.2",
+  "authors": [
+    "Jarvys <yuhan534@126.com>"
+  ],
+  "description": "utilities to get and set radio buttons' value",
+  "main": "radiu.js",
+  "keywords": [
+    "radio",
+    "utilities"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/jarvys/radiu",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.11"
+  }
+}
