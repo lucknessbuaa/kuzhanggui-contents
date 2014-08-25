@@ -87,7 +87,7 @@ define(function(require) {
                     CKEDITOR.instances.id_contents.setData(student[attr])
                 }else
                 if (attr === 'image')
-                    $(this.el[attr]).val('/media/'+student[attr]).trigger('change');
+                    $(this.el[attr]).val(student[attr]).trigger('change');
                 else{
                     $(this.el[attr]).val(student[attr]).trigger('change');
                 }

@@ -14,8 +14,6 @@ bower_components
 node_modules
 
 assets/components
-media
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -70,4 +68,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
->>>>>>> origin/master
+.DS_Store
+media
