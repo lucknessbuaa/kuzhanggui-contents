@@ -2,7 +2,8 @@
 import logging
 from django.db import models
 from ckeditor.fields import RichTextField
-
+from r import redis
+import time
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,9 @@ class Content(models.Model):
     @property
     def video(self):
         return Option.objects.filter(content=self,type=3).count()
+    @property
+    def key(self):
+        return 'content-'+ str(self.pk)
     
     class Meta:
         db_table = u'contents'
@@ -39,7 +43,14 @@ class Option(models.Model):
 
     def __unicode__(self):
         return self.name
+    @property
+    def votes(self):
+        result = redis.zscore(self.content.key,str(self.pk))
+        return 0 if result is None else int(result)
 
+    def addLike(self):
+        redis.zincrby(self.content.key,str(self.pk))
+        return self.votes
 
 class Bigpicture(models.Model):
     content = models.ForeignKey(Content)
@@ -47,3 +58,7 @@ class Bigpicture(models.Model):
     image = models.CharField(verbose_name=u'Image',help_text=u"大小不能超过1M",max_length=255)
     url = models.CharField(verbose_name=u'URL',max_length=100, blank=True,null=True)
     contents = models.ForeignKey(Option,blank=True, null=True)
+
+class Like(models.Model):
+    option = models.ForeignKey(Option)
+    likes = models.IntegerField(null=True,blank=True,default=0)

@@ -1,8 +1,12 @@
 from django.core.urlresolvers import reverse  
-from contents.models import Content,Option,Bigpicture
+from contents.models import Like,Content,Option,Bigpicture
+from django.views.decorators.http import require_POST,require_GET
 from tastypie import fields
+from django_render_json import render_json
 from tastypie.constants import ALL,ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
+from r import redis
+import time
 import logging
 logger = logging.getLogger(__name__)
 
@@ -45,6 +49,11 @@ class ArticleResource(ModelResource):
 
     def dehydrate(self,bundle):
         bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image
+        likes = Like.objects.filter(option_id=bundle.obj.id)
+        count = 0 
+        for like in likes :
+            count = count + like.likes
+        bundle.data['likes'] = count
         return bundle
 
 class ImageResource(ModelResource):
@@ -62,8 +71,11 @@ class ImageResource(ModelResource):
         logger.debug(str(bundle.request.META))
         bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image
         bundle.data['id'] = bundle.obj.pk
-        import random
-        bundle.data['likes'] =  random.randint(0, 100000)
+        likes = Like.objects.filter(option_id=bundle.obj.id)
+        count = 0
+        for like in likes :
+            count = count + like.likes
+        bundle.data['likes'] = count
         return bundle
 
 
@@ -80,7 +92,12 @@ class VideoResource(ModelResource):
         }   
 
     def dehydrate(self,bundle):
-        bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image
+        bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image        
+        likes = Like.objects.filter(option_id=bundle.obj.id)
+        count = 0 
+        for like in likes :
+            count = count + like.likes
+        bundle.data['likes'] = count
         return bundle
 
 
@@ -97,4 +114,32 @@ class BigpictureResource(ModelResource):
         bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image
         bundle.data['url'] = bundle.data['url'] or bundle.obj.contents.pk
         return bundle
+
+@require_GET
+def like(request):
+    option_id = request.GET['option_id']
+    options = Option.objects.filter(pk=option_id)
+    judge = False
+    if options.count()==1:
+        like = Like.objects.filter(option_id=option_id)
+        if like.count()==0:
+            Like(option_id=option_id,likes=1).save()
+            temp = like[0].id
+            like = Like.objects.get(id=temp)
+        else : 
+            temp = like[0].id
+            like = Like.objects.get(id=temp )
+            temp = like.likes
+            like.likes = temp+1
+            like.save()
+        judge = True 
+    if judge:
+        return render_json({
+            'likes':like.likes,
+            'ret_code':0
+        })
+    else : 
+        return render_json({
+            'ret_code':2001
+        })
 
