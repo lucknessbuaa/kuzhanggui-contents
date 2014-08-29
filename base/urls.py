@@ -20,8 +20,8 @@ urlpatterns = patterns('',
     (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^ajax-upload/', include('ajax_upload.urls')),
     url(r'^contents/backend/',include('contents.urls')),
-    url(r'^API/',include(v.urls)),
-    url(r'^API/likes$',like)
+    url(r'^contents/API/',include(v.urls)),
+    url(r'^contents/API/likes$',like)
 )
 if settings.DEBUG:
     urlpatterns += patterns('',
