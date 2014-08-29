@@ -35,8 +35,15 @@ db:
 	$(activate_venv) && ./manage.py syncdb --noinput
 
 
+deps:
+	$(activate_venv) && \
+	pip install -r requirements.txt && \
+	npm install && \
+	bower install
+
 .PHONY: debug \
 		db \
+		deps \
 		collectstatic \
 		reload-uwsgi \
 		start-uwsgi \
