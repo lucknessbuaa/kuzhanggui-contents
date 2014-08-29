@@ -4,7 +4,6 @@ import logging
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-#from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.safestring import mark_safe
@@ -15,11 +14,9 @@ from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 
-#from underscore import _ as us
 from django_tables2 import RequestConfig 
 import django_tables2 as tables
 from django_render_json import json as as_json
-#from django_render_json import render_json
 
 from contents.models import Content, Option, Bigpicture
 from ajax_upload.widgets import AjaxClearableFileInput
@@ -127,9 +124,6 @@ def index(request, content_id):
     table = OptionTable(options)
     bigpicture = Bigpicture.objects.filter(content_id=content_id)
     table1 = BigpictureTable(bigpicture)    
-    logger.debug("---------------------begin-------------------------") 
-    logger.debug(BigpictureForm())
-    logger.debug("---------------------end---------------------------")
     
     RequestConfig(request, paginate={"per_page": 10}).configure(table) 
     return render(request, "options/options.html",{
@@ -190,10 +184,6 @@ def add_bigpicture(request,content_id):
     data['content'] = content_id
     logger.debug(data)
     form = BigpictureForm(data)   
-    logger.debug("---------------------begin-------------------------") 
-    logger.debug(data)
-    logger.debug(form)
-    logger.debug("---------------------end---------------------------") 
     if not form.is_valid():        
         logger.warn("form is invalid");        
         logger.warn("error");
@@ -213,11 +203,6 @@ def edit_bigpicture(request,content_id):
     data['content']=content_id
     form = BigpictureForm(data,instance=instance)
     
-    logger.debug("---------------------begin-------------------------") 
-    logger.debug(form.errors)
-    logger.debug(data)
-    logger.debug(form)
-    logger.debug("---------------------end---------------------------") 
 
     if not form.is_valid():
         logger.warn("form is invalid");
@@ -232,4 +217,4 @@ def delete_bigpicture(request,content_id):
     pk = request.POST.get("pk",'')
     Bigpicture.objects.filter(pk=pk).delete()
     return {'ret_code': 0}
-    
+        
