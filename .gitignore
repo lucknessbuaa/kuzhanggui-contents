@@ -26,6 +26,7 @@ __pycache__/
 env/
 bin/
 build/
+static/
 develop-eggs/
 dist/
 eggs/
@@ -70,3 +71,5 @@ docs/_build/
 
 .DS_Store
 media
+static
+static/
