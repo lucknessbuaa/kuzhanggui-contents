@@ -24,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^API/likes$',like),
     url(r'^API/logs$',logs),
     url(r'^API/chart$',chart),
+    url(r'^contents/API/',include(v.urls)),
+    url(r'^contents/API/likes$',like)
 )
 if settings.DEBUG:
     urlpatterns += patterns('',

@@ -7,9 +7,10 @@ debug:
 
 start-uwsgi:
 	$(activate_venv) \
-	&& uwsgi --socket 127.0.0.1:$(PORT) \
+	&& uwsgi --socket 127.0.0.1:$(port) \
 					--chdir $(shell pwd) \
 					--wsgi-file base/wsgi.py \
+					--static-map /contents/static=$(shell pwd)/static \
 					--master \
 					--process 4 \
 					--daemonize $(shell pwd)/logs/uwsgi.log \
@@ -35,8 +36,15 @@ db:
 	$(activate_venv) && ./manage.py syncdb --noinput
 
 
+deps:
+	$(activate_venv) && \
+	pip install -r requirements.txt && \
+	npm install && \
+	bower install
+
 .PHONY: debug \
 		db \
+		deps \
 		collectstatic \
 		reload-uwsgi \
 		start-uwsgi \
