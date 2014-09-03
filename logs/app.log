@@ -1,28 +1,8 @@
-DEBUG 2014-08-25 10:47:48,316 pagination_filters current: 1, total: 1
-DEBUG 2014-08-25 10:47:48,317 pagination_filters offset: 1, length: 1
-DEBUG 2014-08-25 10:47:53,640 views ---------------------begin-------------------------
-DEBUG 2014-08-25 10:47:53,641 views <tr><th><label for="id_content">Content:</label></th><td><select id="id_content" name="content">
-<option value="" selected="selected">---------</option>
-<option value="1">Content object</option>
-<option value="5">Content object</option>
-<option value="6">Content object</option>
-</select></td></tr>
-<tr><th><label for="id_name">Title:</label></th><td><input class="form-control" id="id_name" maxlength="50" name="name" parsley-required="true" type="text" /></td></tr>
-<tr><th><label for="id_image">Image:</label></th><td><input class="ajax-upload" data-filename="" data-required="True" data-upload-url="/ajax-upload/" id="id_image" name="image" parsley-required="true" type="file" /><br /><span class="helptext">大小不能超过1M</span></td></tr>
-<tr><th><label for="id_url">Url:</label></th><td><input class="form-control" id="id_url" name="url" type="text" /></td></tr>
-<tr><th><label for="id_contents">content:</label></th><td><select class="form-control" id="id_contents" name="contents">
-<option value="" selected="selected">---------</option>
-<option value="38">文章</option>
-<option value="28">仰望星空</option>
-<option value="41">阿迪撒发顺丰</option>
-<option value="40">小电影</option>
-<option value="37">凤飞飞方法</option>
-<option value="27">公益中国行</option>
-<option value="29">厘米脚印</option>
-<option value="39">小图片</option>
-<option value="35">123image</option>
-<option value="34">123article</option>
-</select></td></tr>
-DEBUG 2014-08-25 10:47:53,651 views ---------------------end---------------------------
-DEBUG 2014-08-25 10:47:53,837 pagination_filters current: 1, total: 1
-DEBUG 2014-08-25 10:47:53,837 pagination_filters offset: 1, length: 1
+DEBUG 2014-09-02 19:45:53,505 pagination_filters current: 1, total: 1
+DEBUG 2014-09-02 19:45:53,513 pagination_filters offset: 1, length: 1
+DEBUG 2014-09-02 19:45:54,429 pagination_filters current: 1, total: 1
+DEBUG 2014-09-02 19:45:54,429 pagination_filters offset: 1, length: 1
+DEBUG 2014-09-03 17:40:55,450 pagination_filters current: 1, total: 1
+DEBUG 2014-09-03 17:40:55,450 pagination_filters offset: 1, length: 1
+DEBUG 2014-09-03 17:41:02,102 pagination_filters current: 1, total: 1
+DEBUG 2014-09-03 17:41:02,102 pagination_filters offset: 1, length: 1
