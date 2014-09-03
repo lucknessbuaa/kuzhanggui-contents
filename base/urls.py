@@ -21,7 +21,9 @@ urlpatterns = patterns('',
     url(r'^ajax-upload/', include('ajax_upload.urls')),
     url(r'^contents/backend/',include('contents.urls')),
     url(r'^API/',include(v.urls)),
-    url(r'^API/likes$',like)
+    url(r'^API/likes$',like),
+    url(r'^API/logs$',logs),
+    url(r'^API/chart$',chart),
 )
 if settings.DEBUG:
     urlpatterns += patterns('',

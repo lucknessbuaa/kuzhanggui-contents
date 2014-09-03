@@ -2,7 +2,7 @@ var require = {
     baseUrl: "/static",
     paths: {
         'underscore': 'components/underscore/underscore.js',
-        'jquery': 'components/jquery/jquery.min',
+        'jquery': 'components/jquery/dist/jquery.min',
         'jquery.iframe-transport': 'components/jquery.iframe-transport/jquery.iframe-transport',
         'select2': 'components/select2/select2',
         'bootstrap': 'components/bootstrap/dist/js/bootstrap.min',
@@ -21,7 +21,9 @@ var require = {
         'ckeditor': 'ckeditor/ckeditor',
         'options':'js/options',
         'login': 'js/login',
-        'promotion': 'js/promotion/promotion'
+        'moment':'moment/moment',
+        'promotion': 'js/promotion/promotion',
+        'bootstrap-datetimepicker': "smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min",
     },
     shim: {
         'jquery-placeholder': {
@@ -47,6 +49,9 @@ var require = {
         },
         'ajax_upload': {
             deps: ['jquery', 'jquery.iframe-transport']
-        }
+        },
+        'bootstrap-datetimepicker': {
+            deps: ['jquery', 'bootstrap']
+        }   
     }
 };

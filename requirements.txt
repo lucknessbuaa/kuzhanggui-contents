@@ -18,3 +18,4 @@ django-tastypie
 django-render-json
 django-render-csv
 django-ckeditor-updated
+days

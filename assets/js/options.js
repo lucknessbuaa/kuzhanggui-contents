@@ -1,9 +1,11 @@
 define(function(require) {
     require('jquery');
     require('bootstrap');
+    require("bootstrap-datetimepicker");
     require('jquery-placeholder');
     require('django-csrf-support');
     require("select2");
+    require("moment");
     var multiline = require("multiline");
     var when = require('components/when/when');
     var _ = require("underscore");
@@ -14,8 +16,67 @@ define(function(require) {
     var modals = require('js/modals');
     var formProto = require("js/formProto");
     var vaFormProto = require("js/formValidationProto");
+    var $form = null,
+    form = null;
+
+    begin = moment(moment().subtract(7, 'days').calendar(),"MM/DD/YYYY").valueOf()/1000;
+    end = moment(moment().format("YYYY-MM-DD"),"YYYY-MM-DD").valueOf()/1000;   
+    option_name = null; 
+    option_id = null;
+        function getData(){
+            return $.post("/API/chart",{
+                        'date_begin':begin,
+                        'date_end':end,
+                        'option_id': option_id
+                    },"json");
+        }   
 
 
+
+    function makeChart(){
+        getData().then(function(data){
+            $("#container").highcharts({
+                title: {
+                    text: 'Data of 「'+option_name+'」',
+                    x: -20 //center
+                },  
+                subtitle: {
+                    text: 'The count of '+option_name+'\'s users and visits.',
+                    x: -20 
+                },  
+                xAxis: {
+                    categories: data.date
+                },  
+                yAxis: {
+                    title: {
+                        text: 'Count'
+                    },  
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]  
+                },  
+                tooltip: {
+                    valueSuffix: ''
+                },  
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },  
+                series: [{
+                    name: 'Users',
+                    data: data.user
+                }, {
+                    name: 'Visits',
+                    data: data.visit
+                }]  
+            }); 
+
+        });
+    }
     function addOption(name,image,type, description, contents,url) {
         return when($.post("addopt", {
             name: name,
@@ -178,6 +239,80 @@ define(function(require) {
         }
     }));
 
+    var ChartForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
+        initialize: function() {
+            this.setElement($(ChartForm.tpl())[0]);
+            this.$alert = this.$("div.alert");
+            this.ajaxUploadWidget = new AjaxUploadWidget(this.el.image, {
+                'changeButtonText': 'Change',
+                'removeButtonText': 'Remove'
+            });
+        },
+
+        setStudent: function(student) {
+            _.each(['pk', 'start','end'], _.bind(function(attr) {
+                if (attr === 'start') {
+                    $(this.el[attr]).val(begin)
+                }
+            $(form1.start).val(moment(moment().subtract(7, 'days').calendar()).format("YYYY-MM-DD"));
+            $(form1.stop).val(moment().format("YYYY-MM-DD"),"YYYY-MM-DD");
+            }, this));
+        },
+
+        bind: function(data) {},
+
+        onShow: function() {},
+
+        onHide: function() {
+            var defaults = {
+                'pk': '',
+            };
+            _.each(['pk', 'start', 'end'], _.bind(function(attr) {
+                if(attr==='contents') CKEDITOR.instances.id_contents.setData(defaults[attr]);
+                else $(this.el[attr]).val(defaults[attr]).trigger('change');
+            }, this));
+        },
+
+        save: function() {
+            var onComplete = _.bind(function() {
+                this.trigger('save');
+            }, this);
+
+            this.el.type = type;
+            this.el.contents.value = CKEDITOR.instances.id_contents.getData();
+
+            if (this.el.name.value === '') {
+                this.addError(this.el.name, 'Name can\'t be null');
+                return setTimeout(onComplete, 0);
+            }
+            var onReject = _.bind(function(err) {
+                handleErrors(err,
+                    _.bind(this.onAuthFailure, this),
+                    _.bind(this.onCommonErrors, this),
+                    _.bind(this.onUnknownError, this)
+                );
+            }, this);
+
+            var onFinish = _.bind(function() {
+                this.tip('Success!', 'success');
+                utils.reload(500);
+            }, this);
+
+            if (this.el.pk.value !== "") {
+                editOption(this.el.pk.value, this.el.name.value, this.el.image.value,this.el.type,
+                this.el.description.value,this.el.contents.value,this.el.url.value)
+                    .then(onFinish, onReject)
+                    .ensure(onComplete);
+            } else {
+                addOption(this.el.name.value,  this.el.image.value,this.el.type,
+                          this.el.description.value,this.el.contents.value,this.el.url.value)
+                    .then(onFinish, onReject)
+                    .ensure(onComplete);
+            }
+        }
+    }));
+
+
     var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
         initialize: function() {
             this.setElement($(BigpictureForm.tpl())[0]);
@@ -293,7 +428,6 @@ define(function(require) {
         var modal = new modals.LargeModal();
         modal.setForm(form);
         $(modal.el).appendTo(document.body);
-//        CKEDITOR.replace('contents');
         CKEDITOR.replace("id_contents", {"filebrowserWindowWidth": 940, "toolbar_Basic": [["Source", "-", "Bold", "Italic"]], "toolbar_Full": [["Styles", "Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker", "Undo", "Redo"], ["Image", "Flash", "Table", "HorizontalRule"], ["TextColor", "BGColor"], ["Smiley", "SpecialChar"], ["Source"]], "filebrowserUploadUrl": "/ckeditor/upload/", "height": 300, "width": 650, "filebrowserBrowseUrl": "/ckeditor/browse/", "skin": "moono", "filebrowserWindowHeight": 725, "toolbar": "Full"});
 
         $create = $("#create-article");
@@ -377,68 +511,65 @@ define(function(require) {
     });
 
     $(function() {
-        StudentForm.tpl = _.template($("#form_tpl3").html().trim());
+        ChartForm.tpl = _.template($("#form_tpl3").html().trim());
 
-        var form = new StudentForm();
+        var form = new ChartForm();
         var modal = new modals.ChartModal();
         modal.setForm(form);
         $(modal.el).appendTo(document.body);
-        
         $("table").on("click", ".data", function() {
             var student = $(this).parent().data();
+                
             var name = student.name;
+            var pk = student.pk;
+            option_id = pk;
+            option_name = name;
+            begin = moment(moment().subtract(7, 'days').calendar(),"MM/DD/YYYY").valueOf()/1000;
+            end = moment(moment().format("YYYY-MM-DD"),"YYYY-MM-DD").valueOf()/1000;   
+            $form1 = $("form.form-inline");
+            form1 = $form1[0];
+    
+            $(form1.start).datetimepicker({
+                maxView: 2,
+                minView: 2,
+                viewSelect: 'month',
+                format: 'yyyy-mm-dd'
+            }); 
+            $(form1.stop).datetimepicker({
+                maxView: 2,
+                minView: 2,
+                viewSelect: 'month',
+                format: 'yyyy-mm-dd'
+            }); 
+    
+            $(form1.start).val(moment(moment().subtract(7, 'days').calendar()).format("YYYY-MM-DD"));
+            $(form1.stop).val(moment().format("YYYY-MM-DD"),"YYYY-MM-DD");
 
-            var myDate = new Date();
-
-            $("#container").highcharts({
-                title: {
-                    text: 'Data of 「'+name+'」',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: 'The count of '+name+'\'s users and visits.',
-                    x: -20
-                },
-                xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                yAxis: {
-                    title: {
-                        text: '人数 (个)'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: '°C'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: [{
-                    name: 'Tokyo',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'New York',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                }, {
-                    name: 'Berlin',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'London',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }]
+            $(form1.stop).datetimepicker('setEndDate', moment().format("YYYY-MM-DD"));
+            $(form1.start).datetimepicker('setEndDate', $(form1.stop).val());
+    
+    
+            $(form1.start).change(function(){
+                begin = moment($(form1.start).val(),"YYYY-MM-DD").valueOf()/1000;
             });
-    
-    
+            $(form1.stop).change(function(){
+                end =  moment($(form1.stop).val(),"YYYY-MM-DD").valueOf()/1000;
+            });
+            
+            $("#datebutton").on('click',function(){
+                option_name =name;
+                option_id = pk;
+                if (begin>end){
+                    begin = end; 
+                    $(form1.start).val($(form1.stop).val());
+                }
+                makeChart(); 
+            })
+            var myDate = new Date();
+            makeChart();
             modal.setTitle('Data Chart');
             modal.setSaveText("Save", "Saving...");
+            form.setStudent(student);
             modal.show();
         });
     });

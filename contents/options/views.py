@@ -18,14 +18,49 @@ from django_tables2 import RequestConfig
 import django_tables2 as tables
 from django_render_json import json as as_json
 
-from contents.models import Content, Option, Bigpicture
+from contents.models import Content, Option, Bigpicture,Data
 from ajax_upload.widgets import AjaxClearableFileInput
 from ckeditor.widgets import CKEditorWidget
+import days
 
 logger = logging.getLogger(__name__)
 
+class ChartForm(forms.Form):
+    start = forms.DateField(label="start", input_formats=["%Y-%m-%d"], 
+        required=False, widget=forms.TextInput(attrs={"class": "form-control"}))
+    stop = forms.DateField(label="stop", input_formats=["%Y-%m-%d"], 
+        required=False, widget=forms.TextInput(attrs={"class": "form-control"}))
+    
+    def __init__(self, *args, **kwargs):
+        super(ChartForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        data = super(ChartForm, self).clean()
+        stop = data.get("stop", None)
+        if stop is None:
+            stop = days.today().date()
+        today = days.today().date()
+        if stop >= today:
+            stop = today
+
+        start = data.get("start", None)
+        if start is None:
+            start = (days.today() - timedelta(days=6)).date()
+
+        if start > stop:
+            start = stop
+        elif (stop - start).days > 30:
+            start = stop - timedelta(days=30)
+
+        return {
+            "start": start,
+            "stop": stop,
+        }
+
+
+
 class OptionForm(forms.ModelForm):
-    contents = forms.CharField(label='内容', widget=CKEditorWidget(), required = False)
+    contents = forms.CharField(label='Contents', widget=CKEditorWidget(), required = False)
     class Meta:
         model = Option
         widgets = {
@@ -98,21 +133,31 @@ class OptionTable(tables.Table):
     ops = tables.columns.TemplateColumn(verbose_name=u'ops', template_name='options/option_ops.html', orderable=False)
     type = tables.columns.Column(verbose_name=u'type')
     create_time = tables.columns.DateTimeColumn(verbose_name='Create Time',empty_values=(), format='Y-m-d H:i')
-    user = tables.columns.Column(verbose_name=u'users',default = 0)
-    visit = tables.columns.Column(verbose_name=u'visits',default = 0)
+    user = tables.columns.Column(verbose_name=u'users',empty_values=(),default=0)
+    visit = tables.columns.Column(verbose_name=u'visits',empty_values=(),default=0)
     
+    def render_visit(request,record):
+        value = Data.objects.filter(option_id=record.pk).count();
+        return value
+
+    def render_user(self, record):
+        value = Data.objects.filter(option_id=record.pk).values("uid").distinct().count()
+        return value 
+    
+     
     def render_type(request, record):
-       value = "Article" if record.type==1 else "Image" if record.type==2 else "Video"
-       return value
+        value = "Article" if record.type==1 else "Image" if record.type==2 else "Video"
+        return value
+
 
     class Meta:
-       model = Option
-       fields = ('name','type','create_time','user','visit')  
-       empty_text = u'No Contents'
-       orderable =False
-       attrs = {
-           'class': 'table table-bordered table-striped'
-       } 
+        model = Option
+        fields = ('name','type','create_time','user','visit')  
+        empty_text = u'No Contents'
+        orderable =False
+        attrs = {
+            'class': 'table table-bordered table-striped'
+        } 
 
 @require_GET
 @ensure_csrf_cookie
@@ -136,6 +181,7 @@ def index(request, content_id):
         'name':name,
         'form':OptionForm(),
         'form1':BigpictureForm(),
+        'form3':ChartForm()
     })
 
 @require_POST

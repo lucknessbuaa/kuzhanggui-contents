@@ -62,3 +62,8 @@ class Bigpicture(models.Model):
 class Like(models.Model):
     option = models.ForeignKey(Option)
     likes = models.IntegerField(null=True,blank=True,default=0)
+
+class Data(models.Model):
+    uid = models.CharField(verbose_name=u'uid',max_length=255)
+    option = models.ForeignKey(Option)
+    date = models.CharField(max_length=255)
