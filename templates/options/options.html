@@ -85,12 +85,8 @@
             <label for="d_name" id="coverimage">{{ form.image.label }}</label>
         </div>
         <div class="col-sm-9 checkbox">
-            <div class="col-sm-6">
                 {{ form.image }}
-            </div>
-            <div class="col-sm-4">
-                <p style="font-size:13px">{{form.image.help_text}}</p>
-            </div>
+                <p style="font-size:13px;float:right">{{form.image.help_text}}</p>
             <ul class="parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
@@ -142,12 +138,9 @@
             <label for="d_name">{{ form1.image.label }}</label>
         </div>
         <div class="col-sm-9 checkbox">
-            <div class="col-sm-6">
                 {{ form1.image }}
-            </div>
-            <div class="col-sm-4">
-                <p style="font-size:13px">{{form.image.help_text}}</p>
-            </div>
+                <p style="font-size:13px; float:right">{{form.image.help_text}}</p>
+
             <ul class="parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
@@ -182,8 +175,16 @@
     </div>  
 </form>
 </script>
-<script type="text/template" id="form_tpl3">   
-    <div id="container" style="min-width:800px;height:400px"></div> 
+<script type="text/template" id="form_tpl3">  
+    <div>
+        <form style="margin-left:50px;margin-bottom:50px" class="filter form-inline" method="GET">
+            <div class="form-group">{{ form3.start }}</div>
+            <div class="form-group">&nbsp;to&nbsp;</div>
+            <div class="form-group">{{ form3.stop }}</div> 
+            <button id="datebutton" type="button" class="btn btn-default" style="margin-left:20px">Filter</button>
+        </form>
+        <div id="container"> </div>
+    </div>
 </script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
