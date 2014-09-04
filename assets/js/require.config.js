@@ -2,7 +2,7 @@ var require = {
     baseUrl: "/contents/static",
     paths: {
         'underscore': 'components/underscore/underscore.js',
-        'jquery': 'components/jquery/dist/jquery.min',
+        'jquery': 'components/jquery/jquery.min',
         'jquery.iframe-transport': 'components/jquery.iframe-transport/jquery.iframe-transport',
         'select2': 'components/select2/select2',
         'bootstrap': 'components/bootstrap/dist/js/bootstrap.min',

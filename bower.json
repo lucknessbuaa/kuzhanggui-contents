@@ -13,7 +13,7 @@
     "underscore": "~1.6.0",
     "console-polyfill": "~0.1.1",
     "html5shiv": "~3.7.0",
-    "jquery": "1.11.0",
+    "jquery": "1.10.2",
     "bootstrap": "https://github.com/limijiaoyin/bootstrap.git#plus-lock",
     "respond": "~1.4.2",
     "jquery-placeholder": "~2.0.8",
