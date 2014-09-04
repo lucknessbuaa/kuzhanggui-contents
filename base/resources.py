@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django_render_json import render_json
 from tastypie.constants import ALL,ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
+from django.forms.models import model_to_dict
 from r import redis
 import time
 import logging
@@ -108,12 +109,15 @@ class BigpictureResource(ModelResource):
 
     class Meta:
         queryset = Bigpicture.objects.all()
-        fields = ['id','name','image','url']
+        fields = ['id','name','image','url','data[0]']
         resource_name = 'bigpicture'
 
     def dehydrate(self,bundle):
         bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image
-        bundle.data['url'] = bundle.data['url'] or bundle.obj.contents.pk
+        if (bundle.data['url']) :
+            bundle.data['url'] = bundle.data['url'] or bundle.obj.contents.pk
+        else  :
+            bundle.data['data'] = model_to_dict(Option.objects.get(id=bundle.obj.contents.pk))
         return bundle
 
 @csrf_exempt

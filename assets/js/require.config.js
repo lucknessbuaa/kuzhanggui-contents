@@ -1,5 +1,5 @@
 var require = {
-    baseUrl: "/contents/static",
+    baseUrl: "/static",
     paths: {
         'underscore': 'components/underscore/underscore.js',
         'jquery': 'components/jquery/dist/jquery.min',
@@ -21,9 +21,9 @@ var require = {
         'ckeditor': 'ckeditor/ckeditor',
         'options':'js/options',
         'login': 'js/login',
-        'moment':'moment/moment',
+        'moment':'components/moment/moment',
         'promotion': 'js/promotion/promotion',
-        'bootstrap-datetimepicker': "smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min",
+        'bootstrap-datetimepicker': "components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min",
     },
     shim: {
         'jquery-placeholder': {
