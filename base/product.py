@@ -9,5 +9,6 @@ ALLOWED_HOSTS = '*'
 from base.common import *
 
 STATIC_URL = '/contents/static/'
+MEDIA_ROOT = '/data/contents/media'
 
 from base.loggers import LOGGING

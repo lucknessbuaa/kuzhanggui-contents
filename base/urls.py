@@ -18,7 +18,7 @@ v.register(BigpictureResource())
 urlpatterns = patterns('',
     url(r'^$',index),
     (r'^ckeditor/', include('ckeditor.urls')),
-    url(r'^ajax-upload/', include('ajax_upload.urls')),
+    url(r'^contents/ajax-upload/', include('ajax_upload.urls')),
     url(r'^contents/backend/',include('contents.urls')),
     url(r'^contents/API/',include(v.urls)),
     url(r'^contents/API/likes$',like),

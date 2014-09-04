@@ -327,7 +327,7 @@ define(function(require) {
         setStudent: function(student) {
             _.each(['pk', 'name', 'image','contents','url'], _.bind(function(attr) {
                 if (attr === 'image')
-                    $(this.el[attr]).val('/media/'+student[attr]).trigger('change');
+                    $(this.el[attr]).val(student[attr]).trigger('change');
                 else 
                 if (attr === 'contents'){
                     if(student[attr]=== ''){ 
