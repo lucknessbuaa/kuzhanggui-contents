@@ -24,7 +24,7 @@ define(function(require) {
     option_name = null; 
     option_id = null;
         function getData(){
-            return $.post("/API/chart",{
+            return $.post("/contents/API/chart",{
                         'date_begin':begin,
                         'date_end':end,
                         'option_id': option_id
