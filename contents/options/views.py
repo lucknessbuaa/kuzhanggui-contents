@@ -118,7 +118,7 @@ class BigpictureTable(tables.Table):
         }    
 
     def render_image(request,value):
-        return mark_safe("<a href='/media/%s'><img class='img-thumbnail' src='/media/%s'></a>" % (value,value))
+        return mark_safe("<a href='%s'><img class='img-thumbnail' src='%s'></a>" % (value,value))
     
     def render_url(request,record):
         if record.contents is None :
