@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 00:10+0800\n"
+"POT-Creation-Date: 2014-09-12 00:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,12 +41,16 @@ msgstr ""
 msgid "File path not allowed:"
 msgstr ""
 
-#: base/common.py:65
+#: base/common.py:64
 msgid "English"
 msgstr ""
 
-#: base/common.py:66
+#: base/common.py:65
 msgid "Chinese"
+msgstr ""
+
+#: contents/models.py:12
+msgid "name"
 msgstr ""
 
 #: contents/views.py:23
@@ -80,3 +84,32 @@ msgstr "创建栏目"
 #: templates/contents.html:21
 msgid "Columns"
 msgstr "栏目"
+
+#: templates/options/options.html:16
+msgid "Back to Contents"
+msgstr "返回版块列表"
+
+#: templates/options/options.html:24 templates/options/options.html.py:28
+#: templates/options/options.html:36
+msgid "Create Big Picture"
+msgstr "创建大图"
+
+#: templates/options/options.html:40
+msgid "Create Article"
+msgstr "创建新闻"
+
+#: templates/options/options.html:44
+msgid "Create Image"
+msgstr "创建视频"
+
+#: templates/options/options.html:48
+msgid "Create Video"
+msgstr "创建视频"
+
+#: templates/options/options.html:55
+msgid "Big Pictures"
+msgstr "大图"
+
+#: templates/options/options.html:62
+msgid "Contents"
+msgstr "内容"

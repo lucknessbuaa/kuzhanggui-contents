@@ -29,7 +29,7 @@ define(function(require) {
                     <button type="button" class="btn btn-primary save" 
                         data-loading-text='<%= loading %>'><%= save %></button>
                     <button type="button" class="btn btn-default cancel" 
-                        data-loading-text='Cancel' data-dismiss="modal">Cancel</button>
+                        data-loading-text='Cancel' data-dismiss="modal">取消</button>
                 </div>
             </div>
         </div>

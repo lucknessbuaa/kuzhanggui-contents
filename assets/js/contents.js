@@ -47,7 +47,7 @@ define(function(require) {
             <div class="alert" style="display: none"></div>
             <div class="form-group">
                 <div class="col-sm-4 control-label required">
-                    <label for="id_name">Title</label>
+                    <label for="id_name">名称</label>
                 </div>
                 <div class="col-sm-6">
                     <input type="text" id="id_name" class="form-control" 
@@ -61,7 +61,7 @@ define(function(require) {
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="spt_bp" name="spt_bp">Support Big Picture
+                            <input type="checkbox" id="spt_bp" name="spt_bp">支持大图
                         </label>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ define(function(require) {
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="spt_ar" name="spt_ar">Support Article
+                            <input type="checkbox" id="spt_ar" name="spt_ar">支持新闻
                         </label>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ define(function(require) {
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="spt_im" name="spt_im">Support Image
+                            <input type="checkbox" id="spt_im" name="spt_im">支持图片
                         </label>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ define(function(require) {
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="spt_vi" name="spt_vi">Support Video
+                            <input type="checkbox" id="spt_vi" name="spt_vi">支持视频
                         </label>
                     </div>
                 </div>
@@ -162,7 +162,7 @@ define(function(require) {
             }, this);
 
             var onFinish = _.bind(function() {
-                this.tip('Succeed!', 'success');
+                this.tip('操作成功!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -188,14 +188,14 @@ define(function(require) {
         $create = $("#create-column");
         $create.click(function() {
             modal.show();
-            modal.setTitle('Create Column');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建栏目');
+            modal.setSaveText("创建", "创建...");
         });
 
 
         $("table").on("click", ".edit", function() {
-            modal.setTitle('Edit Column');
-            modal.setSaveText("Save", "Saving...");
+            modal.setTitle('编辑栏目');
+            modal.setSaveText("保存", "保存...");
             var vote = $(this).parent().data();
             form.setVote(vote);
             modal.show();
@@ -209,9 +209,9 @@ define(function(require) {
                 utils.reload(500);
             });
         });
-        modal.setTitle('Delete Column');
-        modal.tip('Are you sure?');
-        modal.setSaveText('Delete', 'Deleting...');
+        modal.setTitle('删除栏目');
+        modal.tip('确定要删除吗?');
+        modal.setSaveText('删除', '删除...');
         modal.on('succeed', function() {
             utils.reload(500);
         });

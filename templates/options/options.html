@@ -1,5 +1,6 @@
 {% extends "scaffold.html" %}
 {% load django_tables2 %}
+{% load i18n %}
 
 {% block title %}{{name}}{% endblock %}
 
@@ -12,7 +13,7 @@
     <h2 style="margin-top: 0px;">{{name}}</h2>
     <div style="position:absolute;right:20px;bottom:10px">
         <span class="glyphicon glyphicon-share-alt" style="font-size:17px"></span>
-        <a href="/contents/backend" style="font-size:18px">Back to Contents</a>
+        <a href="/contents/backend" style="font-size:18px">{% trans "Back to Contents" %}</a>
     </div>
 </div>
 <div class="container">
@@ -20,11 +21,11 @@
     <div class="btn-group">
         {% if spt_bp %}
         <button class="btn btn-default" id="create-bigpicture">
-            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Big Picture
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;{% trans "Create Big Picture" %}
         </button>
         {% else %}
         <button class="btn btn-default" disabled  id="create-bigpicture">
-            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Big Picture
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;{% trans "Create Big Picture" %}
         </button>
         {% endif %}
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -32,33 +33,33 @@
         </button>        
         <ul class="dropdown-menu" role="menu"> 
             {% if spt_bp %}
-            <li><a href="#create-bigpicture" id="create-bigpicture2">&nbsp;&nbsp;Create Big Picture</a></li>
+            <li><a href="#create-bigpicture" id="create-bigpicture2">&nbsp;&nbsp;{% trans "Create Big Picture" %}</a></li>
             {% endif %}
             {% if spt_ar %}
             <li class="divider"></li>
-            <li><a href="#create-article" id="create-article">&nbsp;&nbsp;Create Article</a></li>
+            <li><a href="#create-article" id="create-article">&nbsp;&nbsp;{% trans "Create Article" %}</a></li>
             {% endif %}
             {% if spt_im %}
             <li class="divider"></li>
-            <li><a href="#create-image" id="create-image">&nbsp;&nbsp;Create Image</a></li>
+            <li><a href="#create-image" id="create-image">&nbsp;&nbsp;{% trans "Create Image" %}</a></li>
             {% endif %}
             {% if spt_vi %}            
             <li class="divider"></li>
-            <li><a href="#create-video" id="create-video">&nbsp;&nbsp;Create Video</a></li>
+            <li><a href="#create-video" id="create-video">&nbsp;&nbsp;{% trans "Create Video" %}</a></li>
             {% endif %}
         </ul>
     </div> 
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Big Pictures</div>
+        <div class="panel-heading">{% trans "Big Pictures" %}</div>
         <div class="panel-body">
             {% render_table table1 "table_template.html" %}   
         </div>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Contents</div>
+        <div class="panel-heading">{% trans "Contents" %}</div>
         <div class="panel-body">
             {% render_table table "table_template.html" %}   
         </div>
