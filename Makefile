@@ -42,9 +42,15 @@ deps:
 	npm install && \
 	bower install
 
+messages:
+	$(activate_venv) && \
+	./manage.py makemessages --ignore=venv --ignore=node_modules --ignore=bower_components --locale=zh_CN
+
+
 .PHONY: debug \
 		db \
 		deps \
+		messages \
 		collectstatic \
 		reload-uwsgi \
 		start-uwsgi \

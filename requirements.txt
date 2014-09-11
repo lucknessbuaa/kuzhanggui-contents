@@ -1,6 +1,6 @@
 --index-url http://pypi.douban.com/simple
 
-Django
+Django==1.6.5
 mysql-python
 django-parsley
 python-memcached

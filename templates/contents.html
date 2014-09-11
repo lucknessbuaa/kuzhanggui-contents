@@ -1,7 +1,8 @@
 {% extends "scaffold.html" %}
 {% load django_tables2 %}
+{% load i18n %}
 
-{% block title %}Contents Center{% endblock %}
+{% block title %}{% trans "Contents Center" %}{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/contents.css">
@@ -11,13 +12,13 @@
 <div class="container">
     <div class="btn-toolbar">
         <button class="btn btn-primary" id="create-column">
-            <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Column
+            <span class="glyphicon glyphicon-plus"></span>&nbsp;{% trans "Create Column" %}
         </button>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Columns
+            {% trans "Columns" %}
         </div>
         <div class="panel-body">
             {% render_table table "table_template.html" %}   

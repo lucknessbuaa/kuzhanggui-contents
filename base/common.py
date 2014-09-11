@@ -25,6 +25,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,9 +57,17 @@ CACHES = {
 }
 
 
-LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Asia/Shanghai'
+
+ugettext = lambda s: s
+LANGUAGES = (
+    ('en-us', ugettext('English')),
+    ('zh-cn', ugettext('Chinese'))
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
 
 USE_I18N = True
 

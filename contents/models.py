@@ -1,6 +1,7 @@
-#coding:utf8
+#coding:utf-8
 import logging
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from ckeditor.fields import RichTextField
 from r import redis
 import time
@@ -8,7 +9,7 @@ import time
 logger = logging.getLogger(__name__)
 
 class Content(models.Model):
-    name = models.CharField(verbose_name=u'Title',max_length=20)
+    name = models.CharField(verbose_name=_('name'), max_length=20)
     
     spt_bp = models.BooleanField(default=False)
     spt_ar = models.BooleanField(default=False)

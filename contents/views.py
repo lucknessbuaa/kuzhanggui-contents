@@ -6,6 +6,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django import forms
 
@@ -19,10 +20,10 @@ from contents.models import Content,Option
 logger = logging.getLogger(__name__)
 
 class ContentTable(tables.Table):
-    ops = tables.columns.TemplateColumn(verbose_name=u'ops',template_name='content_ops.html',orderable=False)
-    article = tables.columns.Column(verbose_name=u'Articles',orderable=False)
-    image = tables.columns.Column(verbose_name=u'Images',orderable=False)
-    video = tables.columns.Column(verbose_name=u'Videos',orderable=False)
+    ops = tables.columns.TemplateColumn(verbose_name=_('ops'),template_name='content_ops.html',orderable=False)
+    article = tables.columns.Column(verbose_name=_('articles'),orderable=False)
+    image = tables.columns.Column(verbose_name=_('images'),orderable=False)
+    video = tables.columns.Column(verbose_name=_('videos'),orderable=False)
 
     def render_article(self,record):
         return record.article
@@ -36,11 +37,13 @@ class ContentTable(tables.Table):
     class Meta:
         model=Content
         fields=("name","article","image","video") 
-        empty_text=u'No Contents'
+        empty_text=_('No Contents')
         orderable=False
         attrs = {
             'class': 'table table-bordered table-striped'
         }
+
+
 @require_GET
 @ensure_csrf_cookie
 def index(request):
