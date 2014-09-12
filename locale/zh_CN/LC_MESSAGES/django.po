@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 00:24+0800\n"
+"POT-Creation-Date: 2014-09-12 11:14+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,37 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-#: contents/models.py:12
+#: contents/models.py:12 contents/models.py:39 contents/models.py:60
 msgid "name"
 msgstr ""
 
-#: contents/views.py:23
+#: contents/models.py:40
+msgid "cover"
+msgstr "封面"
+
+#: contents/models.py:41
+msgid "description"
+msgstr "描述"
+
+#: contents/models.py:42
+msgid "content"
+msgstr "内容"
+
+#: contents/models.py:43 contents/models.py:62 contents/options/views.py:111
+#: templates/options/options.html:150 templates/options/options.html.py:157
+msgid "url"
+msgstr "链接"
+
+#: contents/models.py:44 contents/options/views.py:137
+msgid "Create Time"
+msgstr "创建时间"
+
+#: contents/models.py:61
+msgid "image"
+msgstr "图片"
+
+#: contents/views.py:23 contents/options/views.py:110
+#: contents/options/views.py:135
 msgid "ops"
 msgstr "操作"
 
@@ -69,9 +95,30 @@ msgstr "图片"
 msgid "videos"
 msgstr "视频"
 
-#: contents/views.py:40
+#: contents/views.py:40 contents/options/views.py:158
 msgid "No Contents"
 msgstr "暂无内容"
+
+#: contents/options/views.py:64 templates/options/options.html:62
+#: templates/options/options.html.py:154
+msgid "Contents"
+msgstr "内容"
+
+#: contents/options/views.py:116
+msgid "No Big Pictures"
+msgstr "暂无大图"
+
+#: contents/options/views.py:136
+msgid "type"
+msgstr "类型"
+
+#: contents/options/views.py:138
+msgid "users"
+msgstr "用户数量"
+
+#: contents/options/views.py:139
+msgid "visits"
+msgstr "访问数量"
 
 #: templates/contents.html:5
 msgid "Contents Center"
@@ -110,6 +157,6 @@ msgstr "创建视频"
 msgid "Big Pictures"
 msgstr "大图"
 
-#: templates/options/options.html:62
-msgid "Contents"
-msgstr "内容"
+#: templates/options/options.html:185
+msgid "filter"
+msgstr "筛选"

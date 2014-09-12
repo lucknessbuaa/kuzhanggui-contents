@@ -199,7 +199,7 @@ define(function(require) {
                 <div class="modal-body"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default cancel" 
-                        data-loading-text='Cancel' data-dismiss="modal">Close</button>
+                        data-loading-text='Cancel' data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>

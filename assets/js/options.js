@@ -37,11 +37,11 @@ define(function(require) {
         getData().then(function(data){
             $("#container").highcharts({
                 title: {
-                    text: 'Data of 「'+option_name+'」',
+                    text: '「'+option_name+'」',
                     x: -20 //center
                 },  
                 subtitle: {
-                    text: 'The count of '+option_name+'\'s users and visits.',
+                    text: 'uv、pv统计',
                     x: -20 
                 },  
                 xAxis: {
@@ -49,7 +49,7 @@ define(function(require) {
                 },  
                 yAxis: {
                     title: {
-                        text: 'Count'
+                        text: '总数'
                     },  
                     plotLines: [{
                         value: 0,
@@ -67,10 +67,10 @@ define(function(require) {
                     borderWidth: 0
                 },  
                 series: [{
-                    name: 'Users',
+                    name: '用户数量',
                     data: data.user
                 }, {
-                    name: 'Visits',
+                    name: '访问数量',
                     data: data.visit
                 }]  
             }); 
@@ -137,8 +137,8 @@ define(function(require) {
             this.setElement($(StudentForm.tpl())[0]);
             this.$alert = this.$("div.alert");
             this.ajaxUploadWidget = new AjaxUploadWidget(this.el.image, {
-                'changeButtonText': 'Change',
-                'removeButtonText': 'Remove'
+                'changeButtonText': '修改',
+                'removeButtonText': '删除'
             });
         },
 
@@ -187,27 +187,27 @@ define(function(require) {
             this.el.contents.value = CKEDITOR.instances.id_contents.getData();
 
             if (this.el.name.value === '') {
-                this.addError(this.el.name, 'Name can\'t be null');
+                this.addError(this.el.name, '名称不能为空');
                 return setTimeout(onComplete, 0);
             }
 
             if (this.el.image.value === '') {
-                this.addError(this.el.image, 'Cover can\'t be null');
+                this.addError(this.el.image, '封面不能为空');
                 return setTimeout(onComplete, 0);
             }
             
             if (this.el.description.value === '' && this.el.type === 3) {
-                this.addError(this.el.description, 'Description can\'t be null');
+                this.addError(this.el.description, '描述不能为空');
                 return setTimeout(onComplete, 0); 
             } 
 
             if (this.el.url.value === '' && this.el.type === 3) {
-                this.addError(this.el.url, 'URL can\'t be null');
+                this.addError(this.el.url, '链接不能为空');
                 return setTimeout(onComplete, 0);
             }
      
             if (this.el.contents.value === '' && this.el.type === 1) {
-                this.addError(this.el.contents, 'Contents can\'t be null');
+                this.addError(this.el.contents, '内容不能为空');
                 return setTimeout(onComplete, 0); 
             }        
                     
@@ -221,7 +221,7 @@ define(function(require) {
             }, this);
 
             var onFinish = _.bind(function() {
-                this.tip('Success!', 'success');
+                this.tip('操作成功!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -244,8 +244,8 @@ define(function(require) {
             this.setElement($(ChartForm.tpl())[0]);
             this.$alert = this.$("div.alert");
             this.ajaxUploadWidget = new AjaxUploadWidget(this.el.image, {
-                'changeButtonText': 'Change',
-                'removeButtonText': 'Remove'
+                'changeButtonText': '修改',
+                'removeButtonText': '删除'
             });
         },
 
@@ -282,7 +282,7 @@ define(function(require) {
             this.el.contents.value = CKEDITOR.instances.id_contents.getData();
 
             if (this.el.name.value === '') {
-                this.addError(this.el.name, 'Name can\'t be null');
+                this.addError(this.el.name, '名称不能为空');
                 return setTimeout(onComplete, 0);
             }
             var onReject = _.bind(function(err) {
@@ -294,7 +294,7 @@ define(function(require) {
             }, this);
 
             var onFinish = _.bind(function() {
-                this.tip('Success!', 'success');
+                this.tip('操作成功!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -319,8 +319,8 @@ define(function(require) {
             this.$alert = this.$("div.alert");
             $(this.el['contents']).select2(); 
             this.ajaxUploadWidget = new AjaxUploadWidget(this.el.image, {
-                'changeButtonText': 'Change',
-                'removeButtonText': 'Remove'
+                'changeButtonText': '修改',
+                'removeButtonText': '删除'
             });
         },  
 
@@ -374,24 +374,24 @@ define(function(require) {
 
 
             if (this.el.name.value === '') {
-                this.addError(this.el.name, 'Name can\'t be null');
+                this.addError(this.el.name, '名称不能为空');
                 return setTimeout(onComplete, 0);
             }
 
             if (this.el.image.value === '') {
-                this.addError(this.el.image, 'Image can\'t be null');
+                this.addError(this.el.image, '图片不能为空');
                 return setTimeout(onComplete, 0);
             }
             
             if($("#check-content").is(":checked"))
                 if (this.el.contents.value ===''){
-                    this.addError(this.el.contents,'URL can\'t be null');
+                    this.addError(this.el.contents,'内容不能为空');
                     return setTimeout(onComplete, 0);
                 }else 
                     this.el.url.value = '';
             if($("#check-url").is(":checked"))
                 if (this.el.url.value ===''){
-                    this.addError(this.el.url,'URL can\'t be null');
+                    this.addError(this.el.url,'连接不能为空');
                     return setTimeout(onComplete, 0);
                 }else 
                     this.el.contents.value = '';
@@ -403,7 +403,7 @@ define(function(require) {
                 );
             }, this);
             var onFinish = _.bind(function() {
-                this.tip('Success!', 'success');
+                this.tip('操作成功!', 'success');
                 utils.reload(500);
             }, this);
 
@@ -435,8 +435,8 @@ define(function(require) {
             $(".ar").css({"display":"block"});
             type = 1;
             modal.show(); 
-            modal.setTitle('Create Article');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建资讯');
+            modal.setSaveText("创建", "创建...");
         });
         $create2 = $("#create-image");
         $create2.click(function() {
@@ -444,8 +444,8 @@ define(function(require) {
             $("#coverimage").html("Image");
             type = 2;
             modal.show(); 
-            modal.setTitle('Create Image');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建图片');
+            modal.setSaveText("创建", "创建...");
         });
         $create3 = $("#create-video");
         $create3.click(function() {
@@ -453,8 +453,8 @@ define(function(require) {
             $("#vi-required").addClass('required');
             type = 3;
             modal.show(); 
-            modal.setTitle('Create Video');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建视频');
+            modal.setSaveText("创建", "创建...");
         }); 
 
         $("table").on("click", ".edit", function() {
@@ -477,8 +477,8 @@ define(function(require) {
                 $(".vi").css({"display":"block"});
                 $("#vi-required").addClass('required');
             }
-            modal.setTitle('Edit '+name);
-            modal.setSaveText("Save", "Saving...");
+            modal.setTitle('编辑 '+name);
+            modal.setSaveText("保存", "保存...");
             var student = $(this).parent().data();
             form.setStudent(student);
             modal.show();
@@ -498,9 +498,9 @@ define(function(require) {
                 throw err;
             });
         });
-        modal.setTitle('Delete Contents');
-        modal.tip('Are you sure?');
-        modal.setSaveText('Delete', 'Deleting...');
+        modal.setTitle('删除内容');
+        modal.tip('确定要删除吗?');
+        modal.setSaveText('删除', '删除...');
         modal.on('succeed', function() {
             utils.reload(500);
         });
@@ -567,8 +567,8 @@ define(function(require) {
             })
             var myDate = new Date();
             makeChart();
-            modal.setTitle('Data Chart');
-            modal.setSaveText("Save", "Saving...");
+            modal.setTitle('数据报表');
+            modal.setSaveText("保存", "保存...");
             form.setStudent(student);
             modal.show();
         });
@@ -598,19 +598,19 @@ define(function(require) {
         $create = $("#create-bigpicture");
         $create.click(function() {
             modal.show(); 
-            modal.setTitle('Create Big Picture');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建大图');
+            modal.setSaveText("创建", "创建...");
         });
         $create = $("#create-bigpicture2");
         $create.click(function() {
             modal.show();
-            modal.setTitle('Create Big Picture');
-            modal.setSaveText("Create", "Creating...");
+            modal.setTitle('创建大图');
+            modal.setSaveText("创建", "创建...");
         }); 
         $("table").on("click", ".bpedit", function() {
             var student = $(this).parent().data();
-            modal.setTitle('Edit Big Picture');
-            modal.setSaveText("Save", "Saving...");
+            modal.setTitle('编辑大图');
+            modal.setSaveText("保存", "保存...");
             form.setStudent(student);
             modal.show();
         });
@@ -629,9 +629,9 @@ define(function(require) {
                 throw err;
             });
         });
-        modal.setTitle('Delete Big Picture');
-        modal.tip('Are you sure?');
-        modal.setSaveText('Delete', 'Deleting...');
+        modal.setTitle('删除大图');
+        modal.tip('确定要删除吗?');
+        modal.setSaveText('删除', '删除...');
         modal.on('succeed', function() {
             utils.reload(500);
         });

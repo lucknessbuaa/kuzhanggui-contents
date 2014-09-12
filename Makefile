@@ -44,7 +44,8 @@ deps:
 
 messages:
 	$(activate_venv) && \
-	./manage.py makemessages --ignore=venv --ignore=node_modules --ignore=bower_components --locale=zh_CN
+	./manage.py makemessages --ignore=venv --ignore=node_modules --ignore=bower_components --locale=zh_CN && \
+	./manage.py compilemessages
 
 
 .PHONY: debug \

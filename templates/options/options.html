@@ -147,14 +147,14 @@
     </div>   
     <div class="form-group">
         <div class="col-sm-2 control-label required">
-            <label>URL</label>
+            <label>{% trans "url" %}</label>
         </div>
         <div class="col-sm-9">
             <label id="id_ignore" class="radio-inline checkbox">
-                <input id="check-content" class="field" type="radio" name="URL" value="Content" checked="checked">Content  
+                <input id="check-content" class="field" type="radio" name="URL" value="Content" checked="checked">{% trans "Contents" %}  
             </label>
             <label id="id_ignore" class="radio-inline checkbox">
-                <input id="check-url" class="field" type="radio" name="URL" value="URL">URL
+                <input id="check-url" class="field" type="radio" name="URL" value="URL">{% trans "url" %}
             </label>
         </div>
     </div>       
@@ -180,9 +180,9 @@
     <div>
         <form style="margin-left:50px;margin-bottom:50px" class="filter form-inline" method="GET">
             <div class="form-group">{{ form3.start }}</div>
-            <div class="form-group">&nbsp;to&nbsp;</div>
+            <div class="form-group">&nbsp;-&nbsp;</div>
             <div class="form-group">{{ form3.stop }}</div> 
-            <button id="datebutton" type="button" class="btn btn-default" style="margin-left:20px">Filter</button>
+            <button id="datebutton" type="button" class="btn btn-default" style="margin-left:20px">{% trans "filter" %}</button>
         </form>
         <div id="container"> </div>
     </div>

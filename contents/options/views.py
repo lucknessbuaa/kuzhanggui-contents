@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 from django.utils.html import escape
@@ -60,7 +61,7 @@ class ChartForm(forms.Form):
 
 
 class OptionForm(forms.ModelForm):
-    contents = forms.CharField(label='Contents', widget=CKEditorWidget(), required = False)
+    contents = forms.CharField(label=_('Contents'), widget=CKEditorWidget(), required = False)
     class Meta:
         model = Option
         widgets = {
@@ -106,12 +107,13 @@ class BigpictureForm(forms.ModelForm):
         
 
 class BigpictureTable(tables.Table):
-    ops1 = tables.columns.TemplateColumn(verbose_name=u'ops', template_name='options/bigpicture_ops.html', orderable=False)
-    url = tables.columns.Column(empty_values=()) 
+    ops1 = tables.columns.TemplateColumn(verbose_name=_('ops'), template_name='options/bigpicture_ops.html', orderable=False)
+    url = tables.columns.Column(verbose_name=_('url'), empty_values=()) 
+
     class Meta:
         model = Bigpicture
         fields = ('name', 'image','url')
-        empty_text = u'No Big Pictures'
+        empty_text = _('No Big Pictures')
         orderable = False 
         attrs = { 
            'class': 'table table-bordered table-striped'
@@ -130,11 +132,11 @@ class BigpictureTable(tables.Table):
 
 
 class OptionTable(tables.Table):
-    ops = tables.columns.TemplateColumn(verbose_name=u'ops', template_name='options/option_ops.html', orderable=False)
-    type = tables.columns.Column(verbose_name=u'type')
-    create_time = tables.columns.DateTimeColumn(verbose_name='Create Time',empty_values=(), format='Y-m-d H:i')
-    user = tables.columns.Column(verbose_name=u'users',empty_values=(),default=0)
-    visit = tables.columns.Column(verbose_name=u'visits',empty_values=(),default=0)
+    ops = tables.columns.TemplateColumn(verbose_name=_('ops'), template_name='options/option_ops.html', orderable=False)
+    type = tables.columns.Column(verbose_name=_('type'))
+    create_time = tables.columns.DateTimeColumn(verbose_name=_('Create Time'), empty_values=(), format='Y-m-d H:i')
+    user = tables.columns.Column(verbose_name=_('users'), empty_values=(),default=0)
+    visit = tables.columns.Column(verbose_name=_('visits'), empty_values=(),default=0)
     
     def render_visit(request,record):
         value = Data.objects.filter(option_id=record.pk).count();
@@ -153,7 +155,7 @@ class OptionTable(tables.Table):
     class Meta:
         model = Option
         fields = ('name','type','create_time','user','visit')  
-        empty_text = u'No Contents'
+        empty_text = _('No Contents')
         orderable =False
         attrs = {
             'class': 'table table-bordered table-striped'
