@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 11:14+0800\n"
+"POT-Creation-Date: 2014-09-23 14:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,7 +139,7 @@ msgstr "返回版块列表"
 #: templates/options/options.html:24 templates/options/options.html.py:28
 #: templates/options/options.html:36
 msgid "Create Big Picture"
-msgstr "创建大图"
+msgstr "创建焦点图"
 
 #: templates/options/options.html:40
 msgid "Create Article"
@@ -147,7 +147,7 @@ msgstr "创建新闻"
 
 #: templates/options/options.html:44
 msgid "Create Image"
-msgstr "创建视频"
+msgstr "创建图片"
 
 #: templates/options/options.html:48
 msgid "Create Video"
