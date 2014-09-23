@@ -10,6 +10,8 @@ from django.forms.models import model_to_dict
 from r import redis
 import time
 import logging
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -149,20 +151,22 @@ def like(request):
             'ret_code':2001
         })
 
+
 @csrf_exempt
 @require_POST
 def logs(request):
     uid = request.POST['uid']
     option_id = request.POST['option_id']
     options = Option.objects.filter(pk=option_id)
-    judge = 2001
-    if options.count()==1:
-        judge = 0
+
+    if options.count() == 1:
         timeStamp = int(time.time())
-        Data(uid=uid,option_id=option_id,date=timeStamp).save()
+        Data(uid=uid, option_id=option_id, date=timeStamp).save()
+
     return render_json({
-            'ret_code':judge
+        'ret_code': 0
     })
+
 
 @csrf_exempt
 @require_POST
@@ -176,7 +180,7 @@ def chart(request):
     user = []
     visit = []
     link = begin
-    while link<=end :
+    while link <= end :
         list.append(time.strftime('%m-%d',time.localtime(link)))
         data = Data.objects.filter(option_id=option_id,date__gte=link,date__lt=min(link+86400,end))
         visit.append(data.count())
