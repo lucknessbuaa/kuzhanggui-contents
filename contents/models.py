@@ -45,6 +45,7 @@ class Option(models.Model):
 
     def __unicode__(self):
         return self.name
+
     @property
     def votes(self):
         result = redis.zscore(self.content.key,str(self.pk))
@@ -58,7 +59,7 @@ class Option(models.Model):
 class Bigpicture(models.Model):
     content = models.ForeignKey(Content)
     name = models.CharField(verbose_name=_('name'), max_length=50)
-    image = models.CharField(verbose_name=_('image'), help_text=u"大小不能超过1M",max_length=255)
+    image = models.CharField(verbose_name=_('cover'), help_text=u"大小不能超过1M",max_length=255)
     url = models.CharField(verbose_name=_('url'), max_length=100, blank=True,null=True)
     contents = models.ForeignKey(Option,blank=True, null=True)
 

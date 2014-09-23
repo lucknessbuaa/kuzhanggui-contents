@@ -441,7 +441,6 @@ define(function(require) {
         $create2 = $("#create-image");
         $create2.click(function() {
             $(".im").css({"display":"block"});
-            $("#coverimage").html("Image");
             type = 2;
             modal.show(); 
             modal.setTitle('创建图片');
@@ -468,7 +467,6 @@ define(function(require) {
             if(student.type===2){
                 type = 2;
                 name = 'Image';
-                $("#coverimage").html("Image");
                 $(".im").css({"display":"block"});
             }else 
             if(student.type===3){

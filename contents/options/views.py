@@ -62,6 +62,7 @@ class ChartForm(forms.Form):
 
 class OptionForm(forms.ModelForm):
     contents = forms.CharField(label=_('Contents'), widget=CKEditorWidget(), required = False)
+
     class Meta:
         model = Option
         widgets = {
