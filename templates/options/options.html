@@ -32,25 +32,24 @@
             <span class="caret"></span>
         </button>        
         <ul class="dropdown-menu" role="menu"> 
-            {% if spt_bp %}
-            <li><a href="#create-bigpicture" id="create-bigpicture2">&nbsp;&nbsp;{% trans "Create Big Picture" %}</a></li>
-            {% endif %}
+            <li {% if not spt_bp %}class='disabled' {% endif %}>
+                <a href="#create-bigpicture" id="create-bigpicture2">&nbsp;&nbsp;{% trans "Create Big Picture" %}</a>
+            </li>
 
-            {% if spt_ar %}
             <li class="divider"></li>
-            <li><a href="#create-article" id="create-article">&nbsp;&nbsp;{% trans "Create Article" %}</a></li>
-            {% endif %}
+            <li {% if not spt_ar %}class="disabled"{% endif %}>
+                <a href="#create-article" id="create-article">&nbsp;&nbsp;{% trans "Create Article" %}</a>
+            </li>
 
-            {% if spt_im %}
             <li class="divider"></li>
-            <li><a href="#create-image" id="create-image">&nbsp;&nbsp;{% trans "Create Image" %}</a></li>
-            {% endif %}
+            <li {% if not spt_im %}class="disabled"{% endif %}>
+                <a href="#create-image" id="create-image">&nbsp;&nbsp;{% trans "Create Image" %}</a>
+            </li>
 
-            {% if spt_vi %}            
             <li class="divider"></li>
-            <li><a href="#create-video" id="create-video">&nbsp;&nbsp;{% trans "Create Video" %}</a></li>
-            {% endif %}
-
+            <li {% if not spt_vi %}class="disabled"{% endif %}>
+                <a href="#create-video" id="create-video">&nbsp;&nbsp;{% trans "Create Video" %}</a>
+            </li>
         </ul>
     </div> 
     </div>

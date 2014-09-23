@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 14:36+0800\n"
+"POT-Creation-Date: 2014-09-23 14:54+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgid "content"
 msgstr "内容"
 
 #: contents/models.py:43 contents/models.py:62 contents/options/views.py:111
-#: templates/options/options.html:150 templates/options/options.html.py:157
+#: templates/options/options.html:154 templates/options/options.html.py:161
 msgid "url"
 msgstr "链接"
 
@@ -99,8 +99,8 @@ msgstr "视频"
 msgid "No Contents"
 msgstr "暂无内容"
 
-#: contents/options/views.py:64 templates/options/options.html:62
-#: templates/options/options.html.py:154
+#: contents/options/views.py:64 templates/options/options.html:66
+#: templates/options/options.html.py:158
 msgid "Contents"
 msgstr "内容"
 
@@ -141,22 +141,22 @@ msgstr "返回版块列表"
 msgid "Create Big Picture"
 msgstr "创建焦点图"
 
-#: templates/options/options.html:40
+#: templates/options/options.html:41
 msgid "Create Article"
 msgstr "创建新闻"
 
-#: templates/options/options.html:44
+#: templates/options/options.html:46
 msgid "Create Image"
 msgstr "创建图片"
 
-#: templates/options/options.html:48
+#: templates/options/options.html:51
 msgid "Create Video"
 msgstr "创建视频"
 
-#: templates/options/options.html:55
+#: templates/options/options.html:59
 msgid "Big Pictures"
 msgstr "大图"
 
-#: templates/options/options.html:185
+#: templates/options/options.html:189
 msgid "filter"
 msgstr "筛选"
