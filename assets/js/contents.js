@@ -61,7 +61,7 @@ define(function(require) {
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="spt_bp" name="spt_bp">支持大图
+                            <input type="checkbox" id="spt_bp" name="spt_bp">支持焦点图
                         </label>
                     </div>
                 </div>
