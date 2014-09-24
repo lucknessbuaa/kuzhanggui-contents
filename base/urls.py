@@ -2,11 +2,12 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib import admin
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from resources import *
 from tastypie.api import Api
 
 def index(request):
-    return HttpResponse("hello world")
+    return redirect('/contents/backend');
 
 v = Api(api_name = 'output')
 v.register(ContentResource())
@@ -15,6 +16,7 @@ v.register(ArticleResource())
 v.register(VideoResource())
 v.register(ImageResource())
 v.register(BigpictureResource())
+
 urlpatterns = patterns('',
     url(r'^$',index),
     (r'^ckeditor/', include('ckeditor.urls')),
