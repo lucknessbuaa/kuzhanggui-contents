@@ -175,13 +175,13 @@ def chart(request):
     list = []
     user = []
     visit = []
-    link = begin
-    while link<=end :
+    link = begin + 86400
+    while link <= end:
         list.append(time.strftime('%m-%d',time.localtime(link)))
-        data = Data.objects.filter(option_id=option_id,date__gte=link,date__lt=min(link+86400,end))
+        data = Data.objects.filter(option_id=option_id, date__gte=link, date__lt=min(link+86400, end+86400))
         visit.append(data.count())
         user.append(data.values("uid").distinct().count())
-        link = link+86400
+        link = link + 86400
     
     return render_json({
         'ret_code':0,

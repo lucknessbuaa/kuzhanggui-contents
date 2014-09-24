@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-23 14:54+0800\n"
+"POT-Creation-Date: 2014-09-23 21:55+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,11 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
-#: contents/models.py:12 contents/models.py:39 contents/models.py:60
+#: contents/models.py:12 contents/models.py:39 contents/models.py:61
 msgid "name"
 msgstr ""
 
-#: contents/models.py:40
+#: contents/models.py:40 contents/models.py:62
 msgid "cover"
 msgstr "封面"
 
@@ -65,21 +65,17 @@ msgstr "描述"
 msgid "content"
 msgstr "内容"
 
-#: contents/models.py:43 contents/models.py:62 contents/options/views.py:111
-#: templates/options/options.html:154 templates/options/options.html.py:161
+#: contents/models.py:43 contents/models.py:63 contents/options/views.py:112
+#: templates/options/options.html:153 templates/options/options.html.py:160
 msgid "url"
 msgstr "链接"
 
-#: contents/models.py:44 contents/options/views.py:137
+#: contents/models.py:44 contents/options/views.py:138
 msgid "Create Time"
 msgstr "创建时间"
 
-#: contents/models.py:61
-msgid "image"
-msgstr "图片"
-
-#: contents/views.py:23 contents/options/views.py:110
-#: contents/options/views.py:135
+#: contents/views.py:23 contents/options/views.py:111
+#: contents/options/views.py:136
 msgid "ops"
 msgstr "操作"
 
@@ -95,28 +91,28 @@ msgstr "图片"
 msgid "videos"
 msgstr "视频"
 
-#: contents/views.py:40 contents/options/views.py:158
+#: contents/views.py:40 contents/options/views.py:159
 msgid "No Contents"
 msgstr "暂无内容"
 
-#: contents/options/views.py:64 templates/options/options.html:66
-#: templates/options/options.html.py:158
+#: contents/options/views.py:64 templates/options/options.html:65
+#: templates/options/options.html.py:157
 msgid "Contents"
 msgstr "内容"
 
-#: contents/options/views.py:116
+#: contents/options/views.py:117
 msgid "No Big Pictures"
-msgstr "暂无大图"
+msgstr "暂无焦点图"
 
-#: contents/options/views.py:136
+#: contents/options/views.py:137
 msgid "type"
 msgstr "类型"
 
-#: contents/options/views.py:138
+#: contents/options/views.py:139
 msgid "users"
 msgstr "用户数量"
 
-#: contents/options/views.py:139
+#: contents/options/views.py:140
 msgid "visits"
 msgstr "访问数量"
 
@@ -153,10 +149,13 @@ msgstr "创建图片"
 msgid "Create Video"
 msgstr "创建视频"
 
-#: templates/options/options.html:59
+#: templates/options/options.html:58
 msgid "Big Pictures"
-msgstr "大图"
+msgstr "焦点图"
 
-#: templates/options/options.html:189
+#: templates/options/options.html:188
 msgid "filter"
 msgstr "筛选"
+
+#~ msgid "image"
+#~ msgstr "图片"
