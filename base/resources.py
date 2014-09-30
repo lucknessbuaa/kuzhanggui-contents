@@ -113,6 +113,9 @@ class BigpictureResource(ModelResource):
         queryset = Bigpicture.objects.all()
         fields = ['id','name','image','url','data[0]']
         resource_name = 'bigpicture'
+        filtering = { 
+            'content': ALL 
+        }
 
     def dehydrate(self,bundle):
         bundle.data['image'] = 'http://' + bundle.request.META.get('HTTP_HOST') + bundle.obj.image

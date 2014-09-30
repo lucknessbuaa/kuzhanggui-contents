@@ -36,7 +36,7 @@ class Content(models.Model):
 class Option(models.Model):
     content = models.ForeignKey(Content)
     type = models.IntegerField(default=0)
-    name = models.CharField(verbose_name=_('name'), max_length=20)
+    name = models.CharField(verbose_name=_('name'), max_length=255)
     image = models.CharField(verbose_name=_('cover'), help_text=u"大小不能超过1M",max_length=255)
     description = models.TextField(_('description'), blank=True)
     contents = RichTextField(verbose_name=_('content'), blank=True)
