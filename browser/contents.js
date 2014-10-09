@@ -1,4 +1,6 @@
+var fs = require('fs');
 var $ = require('jquery');
+require('bootstrap');
 
 require('node-django-csrf-support')();
 var Backbone = require('backbone');
@@ -41,76 +43,9 @@ function deleteVote(pk) {
     }, "json");
 }
 
-var VoteFormTpl = _.template(multiline(function() {
-    /*@preserve
-        <form role="form" class="form form-horizontal">
-            <input type="hidden" name="pk">
-            <div class="alert" style="display: none"></div>
-            <div class="form-group">
-                <div class="col-sm-4 control-label required">
-                    <label for="id_name">名称</label>
-                </div>
-                <div class="col-sm-6">
-                    <input type="text" id="id_name" class="form-control" 
-                        name="name" maxlength=20>
-                </div>
-            </div> 
-            <div class="form-group">
-                <div class="col-sm-4 control-label">
-                    <label for="id_name"></label>
-                </div>
-                <div class="col-sm-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="spt_bp" name="spt_bp">支持焦点图
-                        </label>
-                    </div>
-                </div>
-            </div>  
-            <div class="form-group">
-                <div class="col-sm-4 control-label">
-                    <label for="id_name"></label>
-                </div>
-                <div class="col-sm-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="spt_ar" name="spt_ar">支持新闻
-                        </label>
-                    </div>
-                </div>
-            </div>  
-            <div class="form-group">
-                <div class="col-sm-4 control-label">
-                    <label for="id_name"></label>
-                </div>
-                <div class="col-sm-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="spt_im" name="spt_im">支持图片
-                        </label>
-                    </div>
-                </div>
-            </div>  
-            <div class="form-group">
-                <div class="col-sm-4 control-label">
-                    <label for="id_name"></label>
-                </div>
-                <div class="col-sm-6">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="spt_vi" name="spt_vi">支持视频
-                        </label>
-                    </div>
-                </div>
-            </div>              
-        </form>
-         */
-    console.log
-}).trim());
-
 var VoteForm = Backbone.View.extend(_.extend(formProto, {
     initialize: function() {
-        this.setElement($(VoteFormTpl())[0]);
+        this.setElement($(VoteForm.tpl())[0]);
         this.$alert = this.$("div.alert");
     },
 
@@ -166,9 +101,11 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         }, this);
 
         if (this.el.name.value === '') {
-            this.addError('name', 'Name is required');
-            return;
+            this.addError(this.el.name, '名称是必填项');
+            return this.trigger('save');
         }
+
+        this.clearError(this.el.name);
 
         var onReject = _.bind(function() {
             this.tip('系统异常！', 'error');
@@ -191,7 +128,9 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
                 .always(onComplete);
         }
     }
-}));
+}), {
+    tpl: _.template(fs.readFileSync(__dirname + '/content.html', 'utf-8'))
+});
 
 $(function() {
     var form = new VoteForm();
@@ -236,4 +175,3 @@ $(function() {
         modal.show();
     });
 });
-

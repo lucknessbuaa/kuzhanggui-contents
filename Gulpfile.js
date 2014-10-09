@@ -1,10 +1,13 @@
 var fs = require('fs');
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var util = require('gulp-util');
 var changed = require('gulp-changed');
 var imagemin = require('gulp-imagemin');
+var merge = require('merge-stream');
 var nodemon = require('gulp-nodemon');
 var tinypng = require('gulp-tinypng');
+var streamify = require('gulp-streamify')
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -13,6 +16,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream')
 var stringify = require('stringify');
 var CombinedStream = require('combined-stream');
+var developing = process.env.NODE_ENV === 'development';
 
 try {
     var notify = require('display-notification');
@@ -20,20 +24,28 @@ try {
     var notify = function() {};
 }
 
-function browserifyStream(entry) {
+function browserifyStream(entry, filename) {
     var b = browserify(entry);
+
     b.transform({
         global: true
-    }, 'brfs')
+    }, 'brfs');
     b.transform({
         global: true
-    }, 'browserify-shim')
-    return b.bundle();
+    }, 'browserify-shim');
+
+    var stream = b.bundle();
+    return stream.on('error', onError(function() {
+            stream.end();
+        })).pipe(source(filename))
+        .pipe(gulpif(!developing, streamify(uglify({
+            preserveComments: 'some'
+        }))));
 }
 
 function onError(fn) {
     return function(err) {
-        util.log(err);
+        console.error(err);
         notify({
             title: 'Error',
             subtitle: 'fail to compiling scripts',
@@ -47,12 +59,20 @@ function onError(fn) {
     }
 }
 
+gulp.task('scripts-options', function() {
+	return browserifyStream("./browser/options.js", "options.js")
+        .pipe(gulp.dest('assets/js'));
+
+});
+
 gulp.task('scripts', function() {
-    var stream = CombinedStream.create();
-    stream.append(fs.createReadStream('assets/components/jquery/jquery.js'));
-    stream.append(fs.createReadStream('assets/components/bootstrap/dist/js/bootstrap.js'));
-    stream.append(browserifyStream('./browser/contents.js'));
-    return stream.pipe(fs.createWriteStream('assets/js/contents.js'))
+    var contents = browserifyStream("./browser/contents.js", "contents.js")
+        .pipe(gulp.dest('assets/js'));
+
+    var options = browserifyStream("./browser/options.js", "options.js")
+        .pipe(gulp.dest('assets/js'));
+
+    return merge(contents, options);
 });
 
 /*

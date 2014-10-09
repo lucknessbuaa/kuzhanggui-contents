@@ -1,20 +1,26 @@
-require('jquery');
+var $ = require('jquery');
 require('bootstrap');
 require("bootstrap-datetimepicker");
 require('jquery-placeholder');
 require('node-django-csrf-support')();
 require("select2");
-require("moment");
 
 require('ajax_upload');
 
+var Backbone = require("backbone");
+Backbone.$ = $;
+
+var moment = require("moment");
 var _ = require("underscore");
-var utils = require('js/utils');
-var handleErrors = utils.handleErrors;
-var modals = require('js/modals');
-var formProto = require("./js/formProto");
-var vaFormProto = require("./js/formValidationProto");
+var modals = require('kuzhanggui-modals');
+var formProto = require("kuzhanggui-formix");
 var $form, form;
+
+function reload(delay) {
+    setTimeout(function() {
+        window.location.reload();
+    }, delay || 0);
+}
 
 var begin = moment(moment().subtract(7, 'days').calendar(), "MM/DD/YYYY").valueOf() / 1000;
 var end = moment(moment().format("YYYY-MM-DD"), "YYYY-MM-DD").valueOf() / 1000;
@@ -74,18 +80,18 @@ function makeChart() {
 }
 
 function addOption(name, image, type, description, contents, url) {
-    return when($.post("addopt", {
+    return $.post("addopt", {
         name: name,
         type: type,
         image: image,
         description: description,
         contents: contents,
         url: url
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 function editOption(pk, name, image, type, description, contents, url) {
-    return when($.post("editopt", {
+    return $.post("editopt", {
         pk: pk,
         name: name,
         image: image,
@@ -93,42 +99,42 @@ function editOption(pk, name, image, type, description, contents, url) {
         description: description,
         contents: contents,
         url: url
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 function deleteOption(pk) {
-    return when($.post("deleteopt", {
+    return $.post("deleteopt", {
         pk: pk
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 function addBigpicture(name, image, contents, url) {
-    return when($.post("addbp", {
+    return $.post("addbp", {
         name: name,
         image: image,
         contents: contents,
         url: url
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 function editBigpicture(pk, name, image, contents, url) {
-    return when($.post("editbp", {
+    return $.post("editbp", {
         pk: pk,
         name: name,
         image: image,
         contents: contents,
         url: url
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 function deleteBigpicture(pk) {
-    return when($.post("deletebp", {
+    return $.post("deletebp", {
         pk: pk
-    }, "json")).then(utils.mapErrors, utils.throwNetError);
+    }, "json");
 }
 
 
-var StudentForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
+var StudentForm = Backbone.View.extend(_.extend({}, formProto, {
     initialize: function() {
         this.setElement($(StudentForm.tpl())[0]);
         this.$alert = this.$("div.alert");
@@ -186,58 +192,53 @@ var StudentForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
 
         if (this.el.name.value === '') {
             this.addError(this.el.name, '名称不能为空');
-            return setTimeout(onComplete, 0);
+            return this.trigger('save');
         }
 
         if (this.el.image.value === '') {
             this.addError(this.el.image, '封面不能为空');
-            return setTimeout(onComplete, 0);
+            return this.trigger('save');
         }
 
         if (this.el.description.value === '' && this.el.type === 3) {
             this.addError(this.el.description, '描述不能为空');
-            return setTimeout(onComplete, 0);
+            return this.trigger('save');
         }
 
         if (this.el.url.value === '' && this.el.type === 3) {
             this.addError(this.el.url, '链接不能为空');
-            return setTimeout(onComplete, 0);
+            return this.trigger('save');
         }
 
         if (this.el.contents.value === '' && this.el.type === 1) {
             this.addError(this.el.contents, '内容不能为空');
-            return setTimeout(onComplete, 0);
+            return this.trigger('save');
         }
 
-
         var onReject = _.bind(function(err) {
-            handleErrors(err,
-                _.bind(this.onAuthFailure, this),
-                _.bind(this.onCommonErrors, this),
-                _.bind(this.onUnknownError, this)
-            );
+            this.tip('网络异常', 'success');
         }, this);
 
         var onFinish = _.bind(function() {
             this.tip('操作成功!', 'success');
-            utils.reload(500);
+            reload(500);
         }, this);
 
         if (this.el.pk.value !== "") {
             editOption(this.el.pk.value, this.el.name.value, this.el.image.value, this.el.type,
                 this.el.description.value, this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         } else {
             addOption(this.el.name.value, this.el.image.value, this.el.type,
                 this.el.description.value, this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         }
     }
 }));
 
-var ChartForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
+var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
     initialize: function() {
         this.setElement($(ChartForm.tpl())[0]);
         this.$alert = this.$("div.alert");
@@ -293,7 +294,7 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
 
         var onFinish = _.bind(function() {
             this.tip('操作成功!', 'success');
-            utils.reload(500);
+            reload(500);
         }, this);
 
         if (this.el.pk.value !== "") {
@@ -310,7 +311,7 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
     }
 }));
 
-var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
+var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
     initialize: function() {
         this.setElement($(BigpictureForm.tpl())[0]);
         this.$alert = this.$("div.alert");
@@ -403,7 +404,7 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, vaFormProto, {
         }, this);
         var onFinish = _.bind(function() {
             this.tip('操作成功!', 'success');
-            utils.reload(500);
+            reload(500);
         }, this);
 
         if (this.el.pk.value !== "") {
@@ -424,11 +425,13 @@ $(function() {
     StudentForm.tpl = _.template($("#form_tpl").html().trim());
 
     var form = new StudentForm();
-    var modal = new modals.LargeModal();
+    var modal = new modals.FormModal({
+        size: 'large'
+    });
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     CKEDITOR.replace("id_contents", {
-        "filebrowserWindowWidth": 940,
+        // "filebrowserWindowWidth": 940,
         "toolbar_Basic": [
             ["Source", "-", "Bold", "Italic"]
         ],
@@ -440,11 +443,11 @@ $(function() {
             ["Source"]
         ],
         "filebrowserUploadUrl": "/ckeditor/upload/",
-        "height": 300,
-        "width": 650,
+        // "height": 300,
+        // "width": 650,
         "filebrowserBrowseUrl": "/ckeditor/browse/",
         "skin": "moono",
-        "filebrowserWindowHeight": 725,
+        // "filebrowserWindowHeight": 725,
         "toolbar": "Full"
     });
 
@@ -517,7 +520,7 @@ $(function() {
     var modal = new modals.ActionModal();
     modal.setAction(function(pk) {
         return deleteOption(pk).then(function() {
-            utils.reload(500);
+            reload(500);
         }, function(err) {
             if (err instanceof errors.AuthFailure) {
                 window.location = "/welcome";
@@ -530,7 +533,7 @@ $(function() {
     modal.tip('确定要删除吗?');
     modal.setSaveText('删除', '删除...');
     modal.on('succeed', function() {
-        utils.reload(500);
+        reload(500);
     });
     $("table").on("click", ".delete", function() {
         modal.setId($(this).parent().data('pk'));
@@ -542,7 +545,9 @@ $(function() {
     ChartForm.tpl = _.template($("#form_tpl3").html().trim());
 
     var form = new ChartForm();
-    var modal = new modals.ChartModal();
+    var modal = new modals.FormModal({
+        size: 'large'
+    });
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     $("table").on("click", ".data", function() {
@@ -656,7 +661,7 @@ $(function() {
     var modal = new modals.ActionModal();
     modal.setAction(function(pk) {
         return deleteBigpicture(pk).then(function() {
-            utils.reload(500);
+            reload(500);
         }, function(err) {
             if (err instanceof errors.AuthFailure) {
                 window.location = "/welcome";
@@ -669,7 +674,7 @@ $(function() {
     modal.tip('确定要删除吗?');
     modal.setSaveText('删除', '删除...');
     modal.on('succeed', function() {
-        utils.reload(500);
+        reload(500);
     });
     $("table").on("click", ".bpdelete", function() {
         modal.setId($(this).parent().data('pk'));
