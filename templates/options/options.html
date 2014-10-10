@@ -191,24 +191,9 @@
     </div>
 </script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
-</script>
-<!--<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.all.min.js">
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.parse.min.js">
 <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
--->
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-
-<!--<script type="text/javascript" src="{{ STATIC_URL }}js/ckeditor.js"></script>
--->
-<!--<script type="text/javascript" src="{{ STATIC_URL }}ckeditor/ckeditor/ckeditor.js"></script>
--->
-<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
--->
-<script>require(["js/options"]);</script>
+
+<script>var global = window;</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/options.js"></script>
 {% endblock %}

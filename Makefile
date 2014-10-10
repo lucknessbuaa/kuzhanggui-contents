@@ -1,9 +1,12 @@
 host:=0.0.0.0
 port:=15540
+settings:=base/develop
+	
 activate_venv=source venv/bin/activate
 
+
 debug:
-	$(activate_venv) && ./manage.py runserver $(host):$(port)
+	$(activate_venv) && ./manage.py runserver $(host):$(port) --settings=$(settings)
 
 start-uwsgi:
 	$(activate_venv) \
@@ -39,8 +42,16 @@ db:
 deps:
 	$(activate_venv) && \
 	pip install -r requirements.txt && \
+	pip install -r requirements-prod.txt && \
 	npm install && \
 	bower install
+
+deps-osx:
+	$(activate_venv) && \
+	pip install -r requirements.txt && \
+	npm install && \
+	bower install
+
 
 messages:
 	$(activate_venv) && \

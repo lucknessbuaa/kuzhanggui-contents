@@ -1,3 +1,5 @@
+import logging
+
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import simplejson
 from django.views.decorators.csrf import csrf_exempt
@@ -6,6 +8,8 @@ from django.views.decorators.http import require_POST
 from ajax_upload.forms import UploadedFileForm
 #from interface.storage import hdfs_storage
 import os
+
+logger = logging.getLogger(__name__)
 
 @csrf_exempt
 @require_POST
@@ -20,4 +24,6 @@ def upload(request):
         }
         return HttpResponse(simplejson.dumps(data))
     else:
+        logger.warn("form is invalid")
+        logger.warn(form.errors)
         return HttpResponseBadRequest(simplejson.dumps({'errors': form.errors}))

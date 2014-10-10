@@ -1,0 +1,6 @@
+--index-url http://pypi.douban.com/simple
+
+mysql-python
+django-mysqlpool
+uwsgi
+pillow
