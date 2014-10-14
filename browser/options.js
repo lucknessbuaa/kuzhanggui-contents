@@ -36,7 +36,12 @@ function getData() {
 
 function makeChart() {
     getData().then(function(data) {
-        $("#container").highcharts({
+        var chart = null;
+        $("#container").ready(function()
+            chart = new Highcharts.Chart({
+            chart: {
+                        renderTo: 'container'
+            },
             title: {
                 text: '「' + option_name + '」',
                 x: -20 //center
@@ -77,6 +82,7 @@ function makeChart() {
         });
 
     });
+    })
 }
 
 function addOption(name, image, type, description, contents, url) {
