@@ -45,12 +45,14 @@ deps:
 	pip install -r requirements-prod.txt && \
 	npm install && \
 	bower install
+	cp -r bootstrap-skin-ckeditor assets/components/ckeditor/skins/
 
 deps-osx:
 	$(activate_venv) && \
 	pip install -r requirements.txt && \
 	npm install && \
 	bower install
+	cp -r bootstrap-skin-ckeditor assets/components/ckeditor/skins/
 
 
 messages:

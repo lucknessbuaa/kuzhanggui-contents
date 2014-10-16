@@ -456,7 +456,7 @@ $(function() {
         // "height": 300,
         // "width": 650,
         "filebrowserBrowseUrl": "/ckeditor/browse/",
-        "skin": "moono",
+        "skin": "bootstrap-skin-ckeditor",
         // "filebrowserWindowHeight": 725,
         "toolbar": "Full",
         language:"zh-cn",
