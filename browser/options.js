@@ -458,7 +458,11 @@ $(function() {
         "filebrowserBrowseUrl": "/ckeditor/browse/",
         "skin": "moono",
         // "filebrowserWindowHeight": 725,
-        "toolbar": "Full"
+        "toolbar": "Full",
+        language:"zh-cn",
+        removePlugins : 'wordcount, symbol, oembed'
+
+
     });
 
     $create = $("#create-article");

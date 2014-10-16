@@ -64,7 +64,7 @@
     "select2": "./assets/components/select2/select2.js",
     "ajax_upload": "./ajax_upload/static/ajax_upload/js/ajax-upload-widget.js",
     "highcharts": "./assets/components/highcharts/highcharts.js",
-    "ckeditor" : "./browser/ckeditor.js"
+    "ckeditor" : "./assets/components/ckeditor/ckeditor.js"
   },
   "browserify-shim": {
     "jquery": {
