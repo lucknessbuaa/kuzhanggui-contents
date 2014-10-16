@@ -26,6 +26,10 @@ var begin = moment(moment().subtract(7, 'days').calendar(), "MM/DD/YYYY").valueO
 var end = moment(moment().format("YYYY-MM-DD"), "YYYY-MM-DD").valueOf() / 1000;
 var option_name, option_id;
 
+var Highcharts = require('highcharts');
+window.CKEDITOR_BASEPATH = '/contents/static/components/ckeditor/';
+var CKEDITOR = require('ckeditor');
+
 function getData() {
     return $.post("/contents/API/chart", {
         'date_begin': begin,
@@ -37,7 +41,7 @@ function getData() {
 function makeChart() {
     getData().then(function(data) {
         var chart = null;
-        $("#container").ready(function()
+        $("#container").ready(function() {
             chart = new Highcharts.Chart({
             chart: {
                         renderTo: 'container'
