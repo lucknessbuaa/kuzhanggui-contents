@@ -562,6 +562,7 @@ $(function() {
     var modal = new modals.FormModal({
         size: 'large'
     });
+    modal.$save.hide();
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     $("table").on("click", ".data", function() {
