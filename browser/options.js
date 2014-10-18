@@ -61,11 +61,15 @@ function makeChart() {
                 title: {
                     text: '总数'
                 },
+                min: 0,
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
                 }]
+            },
+            credits: {
+                enabled: false
             },
             tooltip: {
                 valueSuffix: ''
@@ -607,11 +611,20 @@ $(function() {
         $("#datebutton").on('click', function() {
             option_name = name;
             option_id = pk;
+
+
             if (begin > end) {
                 begin = end;
                 $(form1.start).val($(form1.stop).val());
             }
-            makeChart();
+            if (Math.abs(moment(begin*1000).diff(moment(end*1000), 'days')) > 30)
+            {
+                alert("Date range should be within 30 days");
+            }
+            else
+            {
+                makeChart();
+            }
         })
         var myDate = new Date();
         makeChart();

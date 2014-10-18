@@ -63,7 +63,7 @@
     "jquery-iframetransport": "./assets/components/jquery.iframe-transport/jquery.iframe-transport.js",
     "select2": "./assets/components/select2/select2.js",
     "ajax_upload": "./ajax_upload/static/ajax_upload/js/ajax-upload-widget.js",
-    "highcharts": "./assets/components/highcharts/highcharts.js",
+    "highcharts": "./assets/components/highcharts/highcharts.src.js",
     "ckeditor" : "./assets/components/ckeditor/ckeditor.js"
   },
   "browserify-shim": {
