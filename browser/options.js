@@ -619,13 +619,25 @@ $(function() {
             }
             if (Math.abs(moment(begin*1000).diff(moment(end*1000), 'days')) > 30)
             {
-                alert("Date range should be within 30 days");
+                var errorList = $(this).siblings('ul');
+                errorList.empty();
+                $("<li>30 days at most</li>").appendTo(errorList);
+                errorList.fadeIn();
+
             }
             else
             {
+                var errorList = $(this).siblings('ul');
+                errorList.empty()
+                errorList.hide();
                 makeChart();
             }
         })
+        var errorList = $("#datebutton").siblings('ul');
+        errorList.empty()
+        errorList.hide();
+
+
         var myDate = new Date();
         makeChart();
         modal.setTitle('数据报表');
