@@ -1,4 +1,5 @@
 var fs = require('fs');
+var less = require('gulp-less');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var util = require('gulp-util');
@@ -58,6 +59,16 @@ function onError(fn) {
         }
     }
 }
+
+gulp.task("less", function() {
+    return gulp.src("assets/less/*.less")
+        .pipe(less({
+            compress: true,
+            paths: ["assets", "assets/components", "assets/less"]
+            }))
+        .on("error", console.error)
+        .pipe(gulp.dest("assets/css"));
+});
 
 gulp.task('scripts-options', function() {
 	return browserifyStream("./browser/options.js", "options.js")

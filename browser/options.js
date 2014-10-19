@@ -26,6 +26,10 @@ var begin = moment(moment().subtract(7, 'days').calendar(), "MM/DD/YYYY").valueO
 var end = moment(moment().format("YYYY-MM-DD"), "YYYY-MM-DD").valueOf() / 1000;
 var option_name, option_id;
 
+var Highcharts = require('highcharts');
+window.CKEDITOR_BASEPATH = '/contents/static/components/ckeditor/';
+var CKEDITOR = require('ckeditor');
+
 function getData() {
     return $.post("/contents/API/chart", {
         'date_begin': begin,
@@ -36,7 +40,12 @@ function getData() {
 
 function makeChart() {
     getData().then(function(data) {
-        $("#container").highcharts({
+        var chart = null;
+        $("#container").ready(function() {
+            chart = new Highcharts.Chart({
+            chart: {
+                        renderTo: 'container'
+            },
             title: {
                 text: '「' + option_name + '」',
                 x: -20 //center
@@ -52,11 +61,15 @@ function makeChart() {
                 title: {
                     text: '总数'
                 },
+                min: 0,
                 plotLines: [{
                     value: 0,
                     width: 1,
                     color: '#808080'
                 }]
+            },
+            credits: {
+                enabled: false
             },
             tooltip: {
                 valueSuffix: ''
@@ -77,6 +90,7 @@ function makeChart() {
         });
 
     });
+    })
 }
 
 function addOption(name, image, type, description, contents, url) {
@@ -446,9 +460,13 @@ $(function() {
         // "height": 300,
         // "width": 650,
         "filebrowserBrowseUrl": "/ckeditor/browse/",
-        "skin": "moono",
+        "skin": "bootstrap-skin-ckeditor",
         // "filebrowserWindowHeight": 725,
-        "toolbar": "Full"
+        "toolbar": "Full",
+        language:"zh-cn",
+        removePlugins : 'wordcount, symbol, oembed'
+
+
     });
 
     $create = $("#create-article");
@@ -548,6 +566,7 @@ $(function() {
     var modal = new modals.FormModal({
         size: 'large'
     });
+    modal.$save.hide();
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     $("table").on("click", ".data", function() {
@@ -592,12 +611,33 @@ $(function() {
         $("#datebutton").on('click', function() {
             option_name = name;
             option_id = pk;
+
+
             if (begin > end) {
                 begin = end;
                 $(form1.start).val($(form1.stop).val());
             }
-            makeChart();
+            if (Math.abs(moment(begin*1000).diff(moment(end*1000), 'days')) > 30)
+            {
+                var errorList = $(this).siblings('ul');
+                errorList.empty();
+                $("<li>30 days at most</li>").appendTo(errorList);
+                errorList.fadeIn();
+
+            }
+            else
+            {
+                var errorList = $(this).siblings('ul');
+                errorList.empty()
+                errorList.hide();
+                makeChart();
+            }
         })
+        var errorList = $("#datebutton").siblings('ul');
+        errorList.empty()
+        errorList.hide();
+
+
         var myDate = new Date();
         makeChart();
         modal.setTitle('数据报表');
