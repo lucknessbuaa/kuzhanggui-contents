@@ -9,7 +9,7 @@ import time
 logger = logging.getLogger(__name__)
 
 class Content(models.Model):
-    name = models.CharField(verbose_name=_('name'), max_length=20)
+    name = models.CharField(verbose_name=_('name'), max_length=255)
     
     spt_bp = models.BooleanField(default=False)
     spt_ar = models.BooleanField(default=False)
@@ -40,7 +40,7 @@ class Option(models.Model):
     image = models.CharField(verbose_name=_('cover'), help_text=u"大小不能超过1M",max_length=255)
     description = models.TextField(_('description'), blank=True)
     contents = RichTextField(verbose_name=_('content'), blank=True)
-    url = models.CharField(verbose_name=_('url'), max_length=100,blank=True)
+    url = models.CharField(verbose_name=_('url'), max_length=255,blank=True)
     create_time = models.DateTimeField(verbose_name=_('Create Time'), auto_now_add=True, editable=False)
 
     def __unicode__(self):
@@ -58,9 +58,9 @@ class Option(models.Model):
 
 class Bigpicture(models.Model):
     content = models.ForeignKey(Content)
-    name = models.CharField(verbose_name=_('name'), max_length=50)
+    name = models.CharField(verbose_name=_('name'), max_length=255)
     image = models.CharField(verbose_name=_('cover'), help_text=u"大小不能超过1M",max_length=255)
-    url = models.CharField(verbose_name=_('url'), max_length=100, blank=True,null=True)
+    url = models.CharField(verbose_name=_('url'), max_length=255, blank=True,null=True)
     contents = models.ForeignKey(Option,blank=True, null=True)
 
 

@@ -157,6 +157,15 @@ var StudentForm = Backbone.View.extend(_.extend({}, formProto, {
             'removeButtonText': '删除'
         });
     },
+    events: {
+        'click input[name=name]' : "remove_error_msg",
+        'click input[name=url]'  : 'remove_error_msg',
+        'click textarea[name=description]' : "remove_error_msg",
+        'click input[id=id_image]' : 'remove_error_msg'
+    },
+    remove_error_msg: function(event) {
+        this.clearError($(event.currentTarget));
+    },
 
     setStudent: function(student) {
         _.each(['pk', 'type', 'name', 'image', 'description', 'contents', 'url'], _.bind(function(attr) {
@@ -261,6 +270,12 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
             'removeButtonText': '删除'
         });
     },
+    events: {
+        'click input[name=name]' : "remove_error_msg",
+    },
+    remove_error_msg: function(event) {
+        this.clearError($(event.currentTarget));
+    },
 
     setStudent: function(student) {
         _.each(['pk', 'start', 'end'], _.bind(function(attr) {
@@ -326,6 +341,16 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
 }));
 
 var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
+
+    events: {
+        'click input[id=id_name]' : "remove_error_msg",
+        'click input[name=url]' : "remove_error_msg",
+        'click input[id=id_image]' : 'remove_error_msg',
+
+    },
+    remove_error_msg: function(event) {
+        this.clearError($(event.currentTarget));
+    },
     initialize: function() {
         this.setElement($(BigpictureForm.tpl())[0]);
         this.$alert = this.$("div.alert");
