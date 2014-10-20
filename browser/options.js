@@ -450,12 +450,12 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
             editBigpicture(this.el.pk.value, this.el.name.value, this.el.image.value,
                 this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         } else {
             addBigpicture(this.el.name.value, this.el.image.value,
                 this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         }
     }
 }));
