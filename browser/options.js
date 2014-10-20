@@ -501,6 +501,7 @@ $(function() {
     CKEDITOR.instances.id_contents.on('focus', function() {
         $("ul#ck-parsley-error-list").empty();
     });
+    $($('div#ck_container').children()[0]).css("margin-left", "0px");
 
     $create = $("#create-article");
     $create.click(function() {
