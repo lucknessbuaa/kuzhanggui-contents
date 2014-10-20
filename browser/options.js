@@ -359,6 +359,10 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
             'changeButtonText': '修改',
             'removeButtonText': '删除'
         });
+        $(this.el['contents']).on("select2-selecting", function(e) {
+            var errorList = $(this).siblings('ul.parsley-error-list');
+            errorList.empty().hide();
+        });
     },
 
     setStudent: function(student) {
