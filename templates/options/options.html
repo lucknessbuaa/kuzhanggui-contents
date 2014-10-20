@@ -116,9 +116,9 @@
         <div class="col-sm-2 control-label required">
             <label for="d_name">{{ form.contents.label }}</label>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9"  id='ck_container'>
             {{ form.contents }}
-            <ul class="parsley-error-list" style="display:none"></ul>
+            <ul class="parsley-error-list" id="ck-parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
 </form>

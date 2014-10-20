@@ -234,7 +234,10 @@ var StudentForm = Backbone.View.extend(_.extend({}, formProto, {
         }
 
         if (this.el.contents.value === '' && this.el.type === 1) {
-            this.addError(this.el.contents, '内容不能为空');
+            var errorList = $("ul#ck-parsley-error-list");
+            errorList.empty();
+            $("<li>'内容不能为空'</li>").appendTo(errorList);
+            errorList.fadeIn();
             return this.trigger('save');
         }
 
@@ -359,6 +362,10 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
             'changeButtonText': '修改',
             'removeButtonText': '删除'
         });
+        $(this.el['contents']).on("select2-selecting", function(e) {
+            var errorList = $(this).siblings('ul.parsley-error-list');
+            errorList.empty().hide();
+        });
     },
 
     setStudent: function(student) {
@@ -450,12 +457,12 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
             editBigpicture(this.el.pk.value, this.el.name.value, this.el.image.value,
                 this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         } else {
             addBigpicture(this.el.name.value, this.el.image.value,
                 this.el.contents.value, this.el.url.value)
                 .then(onFinish, onReject)
-                .ensure(onComplete);
+                .always(onComplete);
         }
     }
 }));
@@ -490,9 +497,11 @@ $(function() {
         "toolbar": "Full",
         language:"zh-cn",
         removePlugins : 'wordcount, symbol, oembed'
-
-
     });
+    CKEDITOR.instances.id_contents.on('focus', function() {
+        $("ul#ck-parsley-error-list").empty();
+    });
+    $($('div#ck_container').children()[0]).css("margin-left", "0px");
 
     $create = $("#create-article");
     $create.click(function() {
