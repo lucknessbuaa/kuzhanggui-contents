@@ -234,7 +234,10 @@ var StudentForm = Backbone.View.extend(_.extend({}, formProto, {
         }
 
         if (this.el.contents.value === '' && this.el.type === 1) {
-            this.addError(this.el.contents, '内容不能为空');
+            var errorList = $("ul#ck-parsley-error-list");
+            errorList.empty();
+            $("<li>'内容不能为空'</li>").appendTo(errorList);
+            errorList.fadeIn();
             return this.trigger('save');
         }
 
@@ -494,8 +497,9 @@ $(function() {
         "toolbar": "Full",
         language:"zh-cn",
         removePlugins : 'wordcount, symbol, oembed'
-
-
+    });
+    CKEDITOR.instances.id_contents.on('focus', function() {
+        $("ul#ck-parsley-error-list").empty();
     });
 
     $create = $("#create-article");
