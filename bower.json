@@ -30,7 +30,8 @@
     "excanvas": "*",
     "font-awesome": "~4.1.0",
     "highcharts": "~4.0.4",
-    "ckeditor": "~4.4.5"
+    "ckeditor": "~4.4.5",
+    "i18next"
   },
   "resolutions": {
     "jquery": ">=1.6"

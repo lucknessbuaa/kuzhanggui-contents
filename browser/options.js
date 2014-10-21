@@ -4,9 +4,10 @@ require("bootstrap-datetimepicker");
 require('jquery-placeholder');
 require('node-django-csrf-support')();
 require("select2");
-
 require('ajax_upload');
+require("i18next");
 
+var when = require('when');
 var Backbone = require("backbone");
 Backbone.$ = $;
 
@@ -15,6 +16,15 @@ var _ = require("underscore");
 var modals = require('kuzhanggui-modals');
 var formProto = require("kuzhanggui-formix");
 var $form, form;
+
+var lang = 'zh_CN';
+var langDatetime = 'zh-CN';
+var options = {
+    lng: lang,
+    getAsync: false,
+    resGetPath: '/contents/static/__lng__/__ns__.json'
+};
+i18n.init(options);
 
 function reload(delay) {
     setTimeout(function() {
@@ -117,9 +127,9 @@ function editOption(pk, name, image, type, description, contents, url) {
 }
 
 function deleteOption(pk) {
-    return $.post("deleteopt", {
+    return when($.post("deleteopt", {
         pk: pk
-    }, "json");
+    }, "json"));
 }
 
 function addBigpicture(name, image, contents, url) {
@@ -588,7 +598,7 @@ $(function() {
         reload(500);
     });
     $("table").on("click", ".delete", function() {
-        modal.setId($(this).parent().data('pk'));
+        modal.setData($(this).parent().data('pk'));
         modal.show();
     });
 });
@@ -655,7 +665,7 @@ $(function() {
             {
                 var errorList = $(this).siblings('ul');
                 errorList.empty();
-                $("<li>30 days at most</li>").appendTo(errorList);
+                $("<li>"+i18n.t("errorMsg.chart")+"</li>").appendTo(errorList);
                 errorList.fadeIn();
 
             }
@@ -751,7 +761,7 @@ $(function() {
         reload(500);
     });
     $("table").on("click", ".bpdelete", function() {
-        modal.setId($(this).parent().data('pk'));
+        modal.setData($(this).parent().data('pk'));
         modal.show();
     });
 });
