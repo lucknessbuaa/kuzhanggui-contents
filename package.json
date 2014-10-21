@@ -64,7 +64,8 @@
     "select2": "./assets/components/select2/select2.js",
     "ajax_upload": "./ajax_upload/static/ajax_upload/js/ajax-upload-widget.js",
     "highcharts": "./assets/components/highcharts/highcharts.src.js",
-    "ckeditor" : "./assets/components/ckeditor/ckeditor.js"
+    "ckeditor": "./assets/components/ckeditor/ckeditor.js",
+    "i18next": "./assets/components/i18next/i18next.js"
   },
   "browserify-shim": {
     "jquery": {
@@ -92,11 +93,16 @@
       ]
     },
     "highcharts": {
-        "exports": "Highcharts",
-        "depends":["jquery:$"]
+      "exports": "Highcharts",
+      "depends": [
+        "jquery:$"
+      ]
     },
     "ckeditor": {
-        "exports": "CKEDITOR"  
+      "exports": "CKEDITOR"
+    },
+    "i18next": {
+        "exports": "i18n"
     }
   }
 }
