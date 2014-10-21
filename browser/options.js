@@ -224,39 +224,39 @@ var StudentForm = Backbone.View.extend(_.extend({}, formProto, {
         this.el.contents.value = CKEDITOR.instances.id_contents.getData();
 
         if (this.el.name.value === '') {
-            this.addError(this.el.name, '名称不能为空');
+            this.addError(this.el.name, i18n.t("errorMsg.name"));
             return this.trigger('save');
         }
 
         if (this.el.image.value === '') {
-            this.addError(this.el.image, '封面不能为空');
+            this.addError(this.el.image, i18n.t("errorMsg.cover"));
             return this.trigger('save');
         }
 
         if (this.el.description.value === '' && this.el.type === 3) {
-            this.addError(this.el.description, '描述不能为空');
+            this.addError(this.el.description, i18n.t('errorMsg.description'));
             return this.trigger('save');
         }
 
         if (this.el.url.value === '' && this.el.type === 3) {
-            this.addError(this.el.url, '链接不能为空');
+            this.addError(this.el.url, i18n.t('errorMsg.url'));
             return this.trigger('save');
         }
 
         if (this.el.contents.value === '' && this.el.type === 1) {
             var errorList = $("ul#ck-parsley-error-list");
             errorList.empty();
-            $("<li>'内容不能为空'</li>").appendTo(errorList);
+            $("<li>"+i18n.t('errorMsg.content')+"</li>").appendTo(errorList);
             errorList.fadeIn();
             return this.trigger('save');
         }
 
         var onReject = _.bind(function(err) {
-            this.tip('网络异常', 'success');
+            this.tip(i18n.t('operationMsg.neterror'), 'success');
         }, this);
 
         var onFinish = _.bind(function() {
-            this.tip('操作成功!', 'success');
+            this.tip(i18n.t('operationMsg.succeed'), 'success');
             reload(500);
         }, this);
 
@@ -323,7 +323,7 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
         this.el.contents.value = CKEDITOR.instances.id_contents.getData();
 
         if (this.el.name.value === '') {
-            this.addError(this.el.name, '名称不能为空');
+            this.addError(this.el.name, i18n.t('errorMsg.name'));
             return setTimeout(onComplete, 0);
         }
         var onReject = _.bind(function(err) {
@@ -335,7 +335,7 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
         }, this);
 
         var onFinish = _.bind(function() {
-            this.tip('操作成功!', 'success');
+            this.tip(i18n.t('operationMsg.succeed'), 'success');
             reload(500);
         }, this);
 
@@ -430,24 +430,24 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
 
 
         if (this.el.name.value === '') {
-            this.addError(this.el.name, '名称不能为空');
+            this.addError(this.el.name, i18n.t('errorMsg.name'));
             return setTimeout(onComplete, 0);
         }
 
         if (this.el.image.value === '') {
-            this.addError(this.el.image, '图片不能为空');
+            this.addError(this.el.image, i18n.t('errorMsg.cover'));
             return setTimeout(onComplete, 0);
         }
 
         if ($("#check-content").is(":checked"))
             if (this.el.contents.value === '') {
-                this.addError(this.el.contents, '内容不能为空');
+                this.addError(this.el.contents, i18n.t('errorMsg.content'));
                 return setTimeout(onComplete, 0);
             } else
                 this.el.url.value = '';
         if ($("#check-url").is(":checked"))
             if (this.el.url.value === '') {
-                this.addError(this.el.url, '连接不能为空');
+                this.addError(this.el.url, i18n.t('errorMsg.url'));
                 return setTimeout(onComplete, 0);
             } else
                 this.el.contents.value = '';
@@ -459,7 +459,7 @@ var BigpictureForm = Backbone.View.extend(_.extend({}, formProto, {
             );
         }, this);
         var onFinish = _.bind(function() {
-            this.tip('操作成功!', 'success');
+            this.tip(i18n.t('operationMsg.succeed'), 'success');
             reload(500);
         }, this);
 
