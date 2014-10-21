@@ -48,7 +48,12 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         this.setElement($(VoteForm.tpl())[0]);
         this.$alert = this.$("div.alert");
     },
-
+    events: {
+        'click input[name=name]' : "remove_error_msg"
+    },
+    remove_error_msg: function(event) {
+        this.clearError($(event.currentTarget));
+    },
     setVote: function(vote) {
         _.each(['pk', 'name', 'spt_bp', 'spt_ar', 'spt_im', 'spt_vi'], _.bind(function(attr) {
             if (attr == 'pk' || attr == 'name') {
