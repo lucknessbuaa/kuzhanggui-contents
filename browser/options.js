@@ -60,10 +60,6 @@ function makeChart() {
                 text: '「' + option_name + '」',
                 x: -20 //center
             },
-            subtitle: {
-                text: 'uv、pv统计',
-                x: -20
-            },
             xAxis: {
                 categories: data.date
             },
@@ -302,7 +298,8 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
 
     bind: function(data) {},
 
-    onShow: function() {},
+    onShow: function() {
+    },
 
     onHide: function() {
         var defaults = {
@@ -611,6 +608,7 @@ $(function() {
         size: 'large'
     });
     modal.$save.hide();
+    modal.$cancel.html("关闭");
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     $("table").on("click", ".data", function() {

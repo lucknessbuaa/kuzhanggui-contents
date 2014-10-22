@@ -113,11 +113,11 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         this.clearError(this.el.name);
 
         var onReject = _.bind(function() {
-            this.tip('系统异常！', 'error');
+            this.tip('系统异常', 'error');
         }, this);
 
         var onFinish = _.bind(function() {
-            this.tip('操作成功!', 'success');
+            this.tip('操作成功', 'success');
             reload(500);
         }, this);
 
