@@ -56,7 +56,7 @@ def index(request):
     })
 
 class ContentForm(forms.ModelForm):
-    name = forms.CharField(label=u'Hello',max_length=20) 
+    name = forms.CharField(label=u'Hello', max_length=255) 
     
     class Meta:
         model = Content

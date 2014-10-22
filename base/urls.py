@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -29,6 +30,7 @@ urlpatterns = patterns('',
     url(r'^contents/API/',include(v.urls)),
     url(r'^contents/API/likes$',like)
 )
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT}))

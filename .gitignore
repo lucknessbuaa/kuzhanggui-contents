@@ -74,3 +74,4 @@ media
 static
 
 *.swp
+sqlite3.db
