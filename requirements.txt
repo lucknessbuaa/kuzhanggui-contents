@@ -15,3 +15,4 @@ django-render-json
 django-render-csv
 django-ckeditor-updated
 days
+django-upload-path-generator
