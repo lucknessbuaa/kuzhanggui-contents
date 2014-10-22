@@ -116,9 +116,9 @@
         <div class="col-sm-2 control-label required">
             <label for="d_name">{{ form.contents.label }}</label>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-9"  id='ck_container'>
             {{ form.contents }}
-            <ul class="parsley-error-list" style="display:none"></ul>
+            <ul class="parsley-error-list" id="ck-parsley-error-list" style="display:none"></ul>
         </div>
     </div>   
 </form>
@@ -186,29 +186,18 @@
             <div class="form-group">&nbsp;-&nbsp;</div>
             <div class="form-group">{{ form3.stop }}</div> 
             <button id="datebutton" type="button" class="btn btn-default" style="margin-left:20px">{% trans "filter" %}</button>
+            <ul class="parsley-error-list" style="display:none"></ul>
+
         </form>
         <div id="container"> </div>
     </div>
 </script>
 
-<script type="text/javascript" src="{{ STATIC_URL }}js/require.config.js">
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}components/requirejs/require.js">
-</script>
-<!--<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.all.min.js">
-</script>
-<script type="text/javascript" src="{{ STATIC_URL }}ueditor/ueditor.parse.min.js">
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
--->
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
+<!-- <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script> -->
+<!-- <script src="http://ckeditor.com/apps/ckeditor/4.0/ckeditor.js"> </script> -->
+<!-- <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script> -->
+<!-- <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>  -->
 
-<!--<script type="text/javascript" src="{{ STATIC_URL }}js/ckeditor.js"></script>
--->
-<!--<script type="text/javascript" src="{{ STATIC_URL }}ckeditor/ckeditor/ckeditor.js"></script>
--->
-<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
-<!--<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
--->
-<script>require(["js/options"]);</script>
+<script>var global = window;</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/options.js"></script>
 {% endblock %}

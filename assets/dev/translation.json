@@ -1,0 +1,15 @@
+{
+    "errorMsg": {
+        "chart": "请将时间范围限制在30天以内",
+        "name":  "名称不能为空",
+        "cover": "封面不能为空",
+        "content": "内容不能为空",
+        "url" :  "链接不能为空",
+        "description": "描述不能为空"
+    },
+    "operationMsg": {
+        "succeed": "操作成功",
+        "neterror": "网络异常"
+    }
+}
+
