@@ -60,10 +60,6 @@ function makeChart() {
                 text: '「' + option_name + '」',
                 x: -20 //center
             },
-            subtitle: {
-                text: 'uv、pv统计',
-                x: -20
-            },
             xAxis: {
                 categories: data.date
             },
@@ -302,7 +298,9 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
 
     bind: function(data) {},
 
-    onShow: function() {},
+    onShow: function() {
+        
+    },
 
     onHide: function() {
         var defaults = {
