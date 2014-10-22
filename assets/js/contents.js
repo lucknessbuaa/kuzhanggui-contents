@@ -50,7 +50,12 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         this.setElement($(VoteForm.tpl())[0]);
         this.$alert = this.$("div.alert");
     },
-
+    events: {
+        'click input[name=name]' : "remove_error_msg"
+    },
+    remove_error_msg: function(event) {
+        this.clearError($(event.currentTarget));
+    },
     setVote: function(vote) {
         _.each(['pk', 'name', 'spt_bp', 'spt_ar', 'spt_im', 'spt_vi'], _.bind(function(attr) {
             if (attr == 'pk' || attr == 'name') {
@@ -110,11 +115,11 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         this.clearError(this.el.name);
 
         var onReject = _.bind(function() {
-            this.tip('系统异常！', 'error');
+            this.tip('系统异常', 'error');
         }, this);
 
         var onFinish = _.bind(function() {
-            this.tip('操作成功!', 'success');
+            this.tip('操作成功', 'success');
             reload(500);
         }, this);
 
@@ -131,7 +136,7 @@ var VoteForm = Backbone.View.extend(_.extend(formProto, {
         }
     }
 }), {
-    tpl: _.template("<form role=\"form\" class=\"form form-horizontal\">\n    <input type=\"hidden\" name=\"pk\">\n    <div class=\"alert\" style=\"display: none\"></div>\n    <div class=\"form-group\">\n        <div class=\"col-sm-4 control-label required\">\n            <label for=\"id_name\">名称</label>\n        </div>\n        <div class=\"col-sm-6\">\n            <input type=\"text\" id=\"id_name\" class=\"form-control\" name=\"name\" maxlength='20'>\n        <ul class='parsley-error-list'></ul>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_bp\" name=\"spt_bp\">支持焦点图\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_ar\" name=\"spt_ar\">支持新闻\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_im\" name=\"spt_im\">支持图片\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_vi\" name=\"spt_vi\">支持视频\n            </label>\n        </div>\n    </div>\n</div>\n</form>")
+    tpl: _.template("<form role=\"form\" class=\"form form-horizontal\">\n    <input type=\"hidden\" name=\"pk\">\n    <div class=\"alert\" style=\"display: none\"></div>\n    <div class=\"form-group\">\n        <div class=\"col-sm-4 control-label required\">\n            <label for=\"id_name\">名称</label>\n        </div>\n        <div class=\"col-sm-6\">\n            <input type=\"text\" id=\"id_name\" class=\"form-control\" name=\"name\" >\n        <ul class='parsley-error-list'></ul>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_bp\" name=\"spt_bp\">支持焦点图\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_ar\" name=\"spt_ar\">支持新闻\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_im\" name=\"spt_im\">支持图片\n            </label>\n        </div>\n    </div>\n</div>\n<div class=\"form-group\">\n    <div class=\"col-sm-4 control-label\">\n        <label for=\"id_name\"></label>\n    </div>\n    <div class=\"col-sm-6\">\n        <div class=\"checkbox\">\n            <label>\n                <input type=\"checkbox\" id=\"spt_vi\" name=\"spt_vi\">支持视频\n            </label>\n        </div>\n    </div>\n</div>\n</form>\n")
 });
 
 $(function() {
@@ -177,10 +182,11 @@ $(function() {
         modal.show();
     });
 });
+
 }).call(this,"/browser")
 },{"backbone":4,"bootstrap":2,"jquery":3,"kuzhanggui-formix":6,"kuzhanggui-modals":7,"multiline":9,"node-django-csrf-support":11,"underscore":13}],2:[function(require,module,exports){
 
-; $ = global.$ = require("/Users/yangchen/Documents/develop/kuzhanggui-contents/assets/components/jquery/jquery.js");
+; $ = global.$ = require("/home/xiejilin/work/work_folder/kuzhanggui-contents/assets/components/jquery/jquery.js");
 ;__browserify_shim_require__=require;(function browserifyShim(module, define, require) {
 /*!
  * Bootstrap v3.1.1 (http://getbootstrap.com)
@@ -2147,7 +2153,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
 
 }).call(global, module, undefined, undefined);
 
-},{"/Users/yangchen/Documents/develop/kuzhanggui-contents/assets/components/jquery/jquery.js":3}],3:[function(require,module,exports){
+},{"/home/xiejilin/work/work_folder/kuzhanggui-contents/assets/components/jquery/jquery.js":3}],3:[function(require,module,exports){
 ;__browserify_shim_require__=require;(function browserifyShim(module, exports, require, define, browserify_shim__define__module__export__) {
 /*!
  * jQuery JavaScript Library v1.10.2
@@ -13604,7 +13610,7 @@ var forgot = require("forgot");
 
 var Backbone = require("backbone");
 
-var modalTpl = "<div class=\"modal fade\">\n    <div class=\"modal-dialog\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\"\n                aria-hidden=\"true\">&times;</button>\n                <h4 class=\"modal-title\"><%= title %></h4>\n            </div>\n            <div class=\"modal-body\"></div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary save\"\n                data-loading-text='<%= loading %>'><%= save %></button>\n                <button type=\"button\" class=\"btn btn-default cancel\"\n                data-loading-text='Cancel' data-dismiss=\"modal\">取消</button>\n            </div>\n        </div>\n    </div>\n</div>";
+var modalTpl = "<div class=\"modal fade\">\n    <div class=\"modal-dialog\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <button type=\"button\" class=\"close\" data-dismiss=\"modal\"\n                aria-hidden=\"true\">&times;</button>\n                <h4 class=\"modal-title\"><%= title %></h4>\n            </div>\n            <div class=\"modal-body\"></div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary save\"\n                data-loading-text='<%= loading %>'><%= save %></button>\n                <button type=\"button\" class=\"btn btn-default cancel\"\n                data-loading-text='Cancel' data-dismiss=\"modal\">取消</button>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 var Modal = Backbone.View.extend({
     initialize: function(options) {
@@ -13752,6 +13758,7 @@ module.exports = {
     FormModal: FormModal,
     ActionModal: ActionModal
 };
+
 }).call(this,"/node_modules/kuzhanggui-modals")
 },{"backbone":4,"forgot":5,"underscore":8}],8:[function(require,module,exports){
 //     Underscore.js 1.7.0
@@ -15180,7 +15187,7 @@ var reCommentContents = /\/\*!?(?:\@preserve)?[ \t]*(?:\r\n|\n)([\s\S]*?)(?:\r\n
 
 var multiline = module.exports = function (fn) {
 	if (typeof fn !== 'function') {
-		throw new TypeError('Expected a function.');
+		throw new TypeError('Expected a function');
 	}
 
 	var match = reCommentContents.exec(fn.toString());
