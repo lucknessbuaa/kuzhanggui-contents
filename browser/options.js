@@ -299,7 +299,6 @@ var ChartForm = Backbone.View.extend(_.extend({}, formProto, {
     bind: function(data) {},
 
     onShow: function() {
-        
     },
 
     onHide: function() {
@@ -609,6 +608,7 @@ $(function() {
         size: 'large'
     });
     modal.$save.hide();
+    modal.$cancel.html("关闭");
     modal.setForm(form);
     $(modal.el).appendTo(document.body);
     $("table").on("click", ".data", function() {
